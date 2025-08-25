@@ -1,8 +1,4 @@
-// Dummy logged in user (backend se aayega)
-let currentUser = {
-  name: "Pankaj Aghariya",
-  role: "Farmer" // ya "Buyer"
-};
+let currentUser = { name: "", role: "Buyer" };
 
 // Sidebar Menus role-wise
 const menuItems = {
@@ -80,8 +76,12 @@ const analyticsData = {
 };
 
 // ----------- UI Render Functions ------------
-document.getElementById("username").innerText = currentUser.name;
-document.getElementById("welcomeText").innerText = `Welcome, ${currentUser.name} 👋`;
+function renderUser(){
+  var uEl = document.getElementById("username");
+  var wEl = document.getElementById("welcomeText");
+  if(uEl) uEl.innerText = currentUser.name || 'User';
+  if(wEl) wEl.innerText = `Welcome, ${currentUser.name||'User'} 👋`;
+}
 
 // Sidebar load
 const sidebarMenu = document.getElementById("sidebarMenu");
@@ -116,3 +116,8 @@ new Chart(ctx, {
   data: analyticsData[currentUser.role],
   options: { responsive: true, plugins: { legend: { position: 'top' } } }
 });
+
+fetch('/api/users/me', { headers: { 'Authorization': 'Bearer ' + (localStorage.getItem('token')||'') } })
+  .then(function(r){ return r.ok ? r.json() : null; })
+  .then(function(u){ if(u){ currentUser = u; renderUser(); } })
+  .catch(function(){ /* ignore */ });

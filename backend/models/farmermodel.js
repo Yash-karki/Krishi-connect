@@ -1,30 +1,29 @@
-const { getConnection } = require("./db");
+const { getConnection } = require("../config/db");
 
 const FarmerModel = {
   async addProduce(produce) {
     const conn = await getConnection();
     try {
-      const sql = `
-        INSERT INTO PRODUCE (Produce_ID, Farmer_ID, Name, Quantity, Price)
-        VALUES (PRODUCE_SEQ.NEXTVAL, :farmerId, :name, :quantity, :price)
-      `;
-      const result = await conn.execute(sql, produce, { autoCommit: true });
-      return result;
+      const [result] = await conn.query(
+        'INSERT INTO products (name, price_per_unit, unit) VALUES (?, ?, ?)',
+        [produce.name, produce.price, produce.unit || 'Kg']
+      );
+      return { insertId: result.insertId };
     } finally {
-      await conn.close();
+      conn.release();
     }
   },
 
   async getProduceByFarmer(farmerId) {
     const conn = await getConnection();
     try {
-      const result = await conn.execute(
-        `SELECT * FROM PRODUCE WHERE Farmer_ID = :farmerId`,
-        { farmerId }
+      const [rows] = await conn.query(
+        'SELECT p.* FROM products p WHERE p.user_id = ?',
+        [farmerId]
       );
-      return result.rows;
+      return rows;
     } finally {
-      await conn.close();
+      conn.release();
     }
   }
 };

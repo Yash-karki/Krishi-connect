@@ -6,6 +6,10 @@
 .nav a{margin:0 8px;color:#222;text-decoration:none}
 .nav a.active{color:#1b5e20;font-weight:600}
 .auth .btn{margin-left:8px}
+.auth #userInfo{display:flex;align-items:center;gap:10px}
+.auth #userName{color:#1b5e20;font-weight:500}
+.logout-btn{background:#f44336;color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:14px;transition:background 0.3s}
+.logout-btn:hover{background:#d32f2f}
 .btn{display:inline-block;padding:10px 14px;border-radius:8px;border:1px solid transparent;cursor:pointer;text-decoration:none}
 .btn-primary{background:#1b5e20;color:#fff}
 .btn-success{background:#2e7d32;color:#fff}

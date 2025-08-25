@@ -62,6 +62,21 @@ body {
   border-radius: 50%;
 }
 
+.logout-btn {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.logout-btn:hover {
+  background: #d32f2f;
+}
+
 /* Cards */
 .overview {
   display: grid;

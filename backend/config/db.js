@@ -8,7 +8,7 @@ async function initMySQLPool() {
 		host: process.env.MYSQL_HOST || 'localhost',
 		user: process.env.MYSQL_USER || 'root',
 		password: process.env.MYSQL_PASSWORD || '',
-		database: process.env.MYSQL_DB || 'KrishiConnect',
+		database: process.env.MYSQL_DB || 'krishiconnect',
 		waitForConnections: true,
 		connectionLimit: 10,
 		queueLimit: 0
@@ -26,3 +26,4 @@ async function getConnection() {
 }
 
 module.exports = { initMySQLPool, getConnection };
+

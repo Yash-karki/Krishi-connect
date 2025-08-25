@@ -21,8 +21,14 @@
         <a href="dashboard.html">Dashboard</a>
       </nav>
       <div class="auth">
-        <a class="link" href="signup.html">sign in</a>
-        <a class="btn btn-primary" href="signup.html">sign up</a>
+        <span id="userInfo" style="display: none;">
+          <span id="userName"></span>
+          <button id="logoutBtn" class="logout-btn">Logout</button>
+        </span>
+        <div id="authLinks">
+          <a class="link" href="signup.html">sign in</a>
+          <a class="btn btn-primary" href="signup.html">sign up</a>
+        </div>
       </div>
     </div>
   </header>
@@ -69,6 +75,7 @@
 
 
 
+  <script src="js/auth.js"></script>
   <script src="js/api.js"></script>
   <script src="js/auth-guard.js"></script>
   <script>
@@ -87,28 +94,87 @@
         grid.prepend(div);
       }
       if(form){
-        form.addEventListener('submit', function(e){
+        form.addEventListener('submit', async function(e){
           e.preventDefault();
           var payload = {
             name: document.getElementById('itemName').value.trim(),
             category: document.getElementById('category').value,
-            quantity: parseInt(document.getElementById('quantity').value, 10) || 0,
-            price: parseInt(document.getElementById('price').value, 10) || 0,
+            quantity: parseFloat(document.getElementById('quantity').value) || 0,
+            price: parseFloat(document.getElementById('price').value) || 0,
             description: document.getElementById('description').value.trim()
           };
+
+          if(!window.KrishiAuth || !window.KrishiAuth.isAuthenticated()){
+            alert('Please login to submit a listing.');
+            window.location.href = 'signup.html';
+            return;
+          }
+
+          var btn = form.querySelector('button[type="submit"]');
+          btn.disabled = true;
+          btn.textContent = 'Submitting...';
+
           try {
-            var existing = JSON.parse(localStorage.getItem('my_listings') || '[]');
-            existing.unshift(payload);
-            localStorage.setItem('my_listings', JSON.stringify(existing));
+            // 1) Create listing (protected)
+            await window.KrishiAuth.authenticatedRequest('/api/listings', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                name: payload.name,
+                category: payload.category,
+                quantity: payload.quantity,
+                price: payload.price,
+                description: payload.description
+              })
+            }).then(function(r){ if(!r.ok) return r.json().then(function(j){ throw new Error(j.message||'Failed to create listing'); }); });
+
+            // 2) Also create a product so it appears on Buy Products page
+            await window.KrishiAuth.authenticatedRequest('/api/products', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                name: payload.name,
+                price: payload.price,
+                unit: 'Kg'
+              })
+            }).then(function(r){ if(!r.ok) return r.json().then(function(j){ throw new Error(j.message||'Failed to create product'); }); });
+
+            // Update UI locally
             addCard(payload);
             form.reset();
-            alert('Listing submitted');
-          } catch(err){ console.error(err); }
+            alert('Listing submitted and published to marketplace.');
+          } catch(err){
+            console.error(err);
+            alert(err.message || 'Submission failed');
+          } finally {
+            btn.disabled = false;
+            btn.textContent = 'Submit Listing';
+          }
         });
+
+        // Load existing local (optional legacy)
         try{
           var existing = JSON.parse(localStorage.getItem('my_listings') || '[]');
           existing.forEach(addCard);
         }catch(_e){}
+      }
+      
+      // Setup authentication UI
+      if (window.KrishiAuth && window.KrishiAuth.isAuthenticated()) {
+        const user = window.KrishiAuth.getCurrentUser();
+        if (user) {
+          document.getElementById('userName').textContent = `Welcome, ${user.name}`;
+          document.getElementById('userInfo').style.display = 'inline';
+          document.getElementById('authLinks').style.display = 'none';
+          
+          // Setup logout button
+          const logoutBtn = document.getElementById('logoutBtn');
+          if (logoutBtn) {
+            logoutBtn.addEventListener('click', function() {
+              window.KrishiAuth.logout();
+            });
+          }
+        }
       }
     })();
   </script>
