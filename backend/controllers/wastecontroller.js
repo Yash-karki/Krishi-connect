@@ -6,15 +6,19 @@ async function createListing(req, res){
   const conn = await getConnection();
   try{
     await conn.beginTransaction();
+    
+    // 1. Create the listing
     await conn.query(
       'INSERT INTO listings (user_id, name, category, quantity, price, description) VALUES (?, ?, ?, ?, ?, ?)',
-      [req.user.id, name, category, quantity, price, description || null]
+      [req.user.id, name, category, quantity, price, description]
     );
-    // Also create a product entry so it shows up for buyers
+
+    // 2. Also create a product entry so it shows up for buyers
     await conn.query(
       'INSERT INTO products (name, price_per_unit, unit) VALUES (?, ?, ?)',
       [name, price, 'Kg']
     );
+
     await conn.commit();
     return res.status(201).json({ message: 'Created' });
   } catch(e) { 

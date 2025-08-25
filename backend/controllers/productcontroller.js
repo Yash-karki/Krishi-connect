@@ -24,7 +24,7 @@ async function createProduct(req, res){
   try{
     await conn.query(
       'INSERT INTO products (name, price_per_unit, unit) VALUES (?, ?, ?)',
-      [name, price, unit || 'Kg']
+      [name, price, unit]
     );
     return res.status(201).json({ message: 'Created' });
   } catch(e) { 

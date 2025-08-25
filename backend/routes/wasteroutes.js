@@ -4,6 +4,7 @@ const { createListing, myListings } = require('../controllers/wastecontroller');
 const { authRequired } = require('../middlewares/authmiddleware');
 
 router.post('/', authRequired, createListing);
+router.get('/me', authRequired, myListings);
 router.get('/mine', authRequired, myListings);
 
 module.exports = router;

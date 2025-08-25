@@ -32,8 +32,8 @@
       <div class="auth-form" id="signin">
         <h2>Login Here!</h2>
         <div class="form-group">
-          <label>User Name</label>
-          <input id="loginEmail" type="email" placeholder="Enter your username" required>
+          <label>Email</label>
+          <input id="loginEmail" type="email" placeholder="Enter your email" required>
         </div>
         <div class="form-group">
           <label>Password</label>
@@ -77,7 +77,7 @@
     <div class="branding-section">
       <div class="branding-content">
         <div class="branding-icon">
-          🚜
+          <img src="assets/images/WhatsApp Image 2025-08-24 at 12.28.42_4c875f8b.jpg" alt="">
         </div>
         <div class="branding-text">
           <span class="devanagari">कृषि</span> Connect
@@ -173,7 +173,7 @@
           try {
             const result = await window.KrishiAuth.signup({ name, email, password });
             if (result.success) {
-              window.location.href = 'dashboard.html';
+              window.location.href = 'index.html';
             } else {
               alert(result.error || 'Signup failed');
             }
