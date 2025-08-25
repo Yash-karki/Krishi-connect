@@ -1,30 +1,26 @@
-const { getConnection } = require("./db");
+const { getConnection } = require("../config/db");
 
 const UserModel = {
   async createUser(user) {
     const conn = await getConnection();
     try {
-      const sql = `
-        INSERT INTO USERS (User_ID, Name, Email, Password, Role)
-        VALUES (USER_SEQ.NEXTVAL, :name, :email, :password, :role)
-      `;
-      const result = await conn.execute(sql, user, { autoCommit: true });
-      return result;
+      const [result] = await conn.query(
+        'INSERT INTO users (name, email, password_hash, role) VALUES (?, ?, ?, ?)',
+        [user.name, user.email, user.password, user.role]
+      );
+      return { insertId: result.insertId };
     } finally {
-      await conn.close();
+      conn.release();
     }
   },
 
   async findUserByEmail(email) {
     const conn = await getConnection();
     try {
-      const result = await conn.execute(
-        `SELECT * FROM USERS WHERE Email = :email`,
-        { email }
-      );
-      return result.rows[0];
+      const [rows] = await conn.query('SELECT * FROM users WHERE email = ? LIMIT 1', [email]);
+      return rows[0] || null;
     } finally {
-      await conn.close();
+      conn.release();
     }
   }
 };

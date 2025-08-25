@@ -9,3 +9,4 @@ router.post('/', authRequired, createProduct);
 module.exports = router;
 
 
+

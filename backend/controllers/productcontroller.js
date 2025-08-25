@@ -4,13 +4,13 @@ async function listProducts(req, res){
   const q = (req.query.q || '').trim().toLowerCase();
   const conn = await getConnection();
   try{
-    let sql = 'SELECT ID, NAME, PRICE_PER_UNIT AS PRICE, UNIT FROM PRODUCTS';
-    let binds = {};
-    if(q){ sql += ' WHERE LOWER(NAME) LIKE :q'; binds.q = `%${q}%`; }
-    const r = await conn.execute(sql, binds);
-    return res.json(r.rows);
+    let sql = 'SELECT id, name, price_per_unit AS price, unit FROM products';
+    let params = [];
+    if(q){ sql += ' WHERE LOWER(name) LIKE ?'; params.push(`%${q}%`); }
+    const [rows] = await conn.query(sql, params);
+    return res.json(rows);
   }catch(e){ console.error(e); return res.status(500).json({message:'Server error'}); }
-  finally{ await conn.close(); }
+  finally{ conn.release(); }
 }
 
 async function createProduct(req, res){
@@ -18,16 +18,16 @@ async function createProduct(req, res){
   if(!name || !price) return res.status(400).json({message:'Missing fields'});
   const conn = await getConnection();
   try{
-    await conn.execute(
-      'INSERT INTO PRODUCTS (NAME, PRICE_PER_UNIT, UNIT) VALUES (:name, :price, :unit)',
-      { name, price, unit: unit || 'Kg' },
-      { autoCommit: true }
+    await conn.query(
+      'INSERT INTO products (name, price_per_unit, unit) VALUES (?, ?, ?)',
+      [name, price, unit || 'Kg']
     );
     return res.status(201).json({ message: 'Created' });
   }catch(e){ console.error(e); return res.status(500).json({message:'Server error'}); }
-  finally{ await conn.close(); }
+  finally{ conn.release(); }
 }
 
 module.exports = { listProducts, createProduct };
+
 
 
