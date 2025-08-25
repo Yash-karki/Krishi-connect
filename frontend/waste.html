@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sell Produce / Waste - कृषिConnect</title>
+  <link rel="stylesheet" href="css/products.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-wrap">
+      <div class="brand">
+        <a href="index.html" class="brand-link"><span class="logo-text">कृषि</span><span class="logo-strong">Connect</span></a>
+      </div>
+      <nav class="nav">
+        <a href="products.html">Buy Produce</a>
+        <a href="waste.html" class="active">Sell Produce/Waste</a>
+        <a href="dashboard.html">Dashboard</a>
+      </nav>
+      <div class="auth">
+        <a class="link" href="signup.html">sign in</a>
+        <a class="btn btn-primary" href="signup.html">sign up</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="sell-section">
+      <h1>List Your Produce or Byproducts</h1>
+      <p class="sub">Sell in bulk directly to buyers and industries</p>
+
+      <form id="wasteForm" class="sell-form">
+        <div class="form-row">
+          <label>Item Name</label>
+          <input type="text" id="itemName" placeholder="e.g., Sugarcane Bagasse" required />
+        </div>
+        <div class="form-row">
+          <label>Category</label>
+          <select id="category" required>
+            <option value="Produce">Produce</option>
+            <option value="Waste">Waste / Byproduct</option>
+          </select>
+        </div>
+        <div class="form-row cols-2">
+          <div>
+            <label>Quantity (Kg)</label>
+            <input type="number" id="quantity" min="1" required />
+          </div>
+          <div>
+            <label>Price per Kg (₹)</label>
+            <input type="number" id="price" min="1" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Description</label>
+          <textarea id="description" rows="3" placeholder="Short description"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Submit Listing</button>
+      </form>
+    </section>
+
+    <section class="products-grid" id="myListings">
+      <!-- User listings appear here -->
+    </section>
+  </main>
+
+
+
+  <script src="js/api.js"></script>
+  <script src="js/auth-guard.js"></script>
+  <script>
+    (function() {
+      var form = document.getElementById('wasteForm');
+      var grid = document.getElementById('myListings');
+      function addCard(data){
+        var div = document.createElement('div');
+        div.className = 'product-card';
+        div.innerHTML = '<div class="pc-body">'
+          + '<h3>'+data.name+'</h3>'
+          + '<p class="muted">'+data.category+' • '+data.quantity+' Kg</p>'
+          + '<p><strong>₹'+data.price+'/Kg</strong></p>'
+          + '<p>'+ (data.description||'') +'</p>'
+          + '</div>';
+        grid.prepend(div);
+      }
+      if(form){
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          var payload = {
+            name: document.getElementById('itemName').value.trim(),
+            category: document.getElementById('category').value,
+            quantity: parseInt(document.getElementById('quantity').value, 10) || 0,
+            price: parseInt(document.getElementById('price').value, 10) || 0,
+            description: document.getElementById('description').value.trim()
+          };
+          try {
+            var existing = JSON.parse(localStorage.getItem('my_listings') || '[]');
+            existing.unshift(payload);
+            localStorage.setItem('my_listings', JSON.stringify(existing));
+            addCard(payload);
+            form.reset();
+            alert('Listing submitted');
+          } catch(err){ console.error(err); }
+        });
+        try{
+          var existing = JSON.parse(localStorage.getItem('my_listings') || '[]');
+          existing.forEach(addCard);
+        }catch(_e){}
+      }
+    })();
+  </script>
+</body>
+</html>
+
+

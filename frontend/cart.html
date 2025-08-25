@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart - कृषिConnect</title>
+  <link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-wrap">
+      <div class="brand">
+        <a href="index.html" class="brand-link"><span class="logo-text">कृषि</span><span class="logo-strong">Connect</span></a>
+      </div>
+      <nav class="nav">
+        <a href="products.html">Buy Produce</a>
+        <a href="waste.html">Sell Produce/Waste</a>
+        <a href="dashboard.html">Dashboard</a>
+      </nav>
+      <div class="auth">
+        <a class="link" href="signup.html">sign in</a>
+        <a class="btn btn-primary" href="signup.html">sign up</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Cart Section -->
+  <section class="cart-container">
+    <h1>Your Shopping Cart</h1>
+    <div class="cart-items" id="cartItems">
+      <!-- Dynamic JS render -->
+    </div>
+
+    <!-- Cart Summary -->
+    <div class="cart-summary">
+      <h2>Order Summary</h2>
+      <p>Total Items: <span id="totalItems">0</span></p>
+      <p>Total Price: ₹<span id="totalPrice">0</span></p>
+      <button class="checkout">Proceed to Checkout</button>
+    </div>
+  </section>
+
+
+
+  <script src="js/api.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth-guard.js"></script>
+</body>
+</html>

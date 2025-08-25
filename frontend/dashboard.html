@@ -1,22 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>कृषिConnect — Home</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - कृषिConnect</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <header>
-    <div class="logo-tab">कृषि<strong>Connect</strong></div>
-  </header>
-  <hr class="partition" />
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">कृषि<span>Connect</span></div>
+    <ul id="sidebarMenu">
+      <!-- Menu items JS ke through load honge -->
+    </ul>
+  </aside>
 
-  <div class="container" style="justify-content:center;">
-    <div class="form-section" style="width:480px; text-align:center;">
-      <h2>🌱 Welcome to Home</h2>
-      <p>Login successful.</p>
-      <a href="/logout" class="signin-btn" style="display:inline-block; margin-top:10px;">Logout</a>
-    </div>
-  </div>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Top Navbar -->
+    <header class="topbar">
+      <h2 id="welcomeText">Welcome 👨‍🌾</h2>
+      <div class="user-box">
+        <span id="username">User</span>
+        <img src="https://i.ibb.co/PhbPWhK/farmer-avatar.png" alt="User Avatar">
+      </div>
+    </header>
+
+    <!-- Dynamic Sections -->
+    <section id="dashboardContent">
+      <!-- Cards and Analytics JS ke through inject honge -->
+    </section>
+  </main>
+
+  <script src="js/dashboard.js"></script>
+  <script>
+    // quick nav hookup
+    (function(){
+      var logo = document.querySelector('.logo');
+      if(logo){ logo.style.cursor = 'pointer'; logo.addEventListener('click', function(){ window.location.href = 'index.html'; }); }
+    })();
+  </script>
 </body>
 </html>88
