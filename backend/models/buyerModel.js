@@ -20,7 +20,7 @@ const BuyerModel = {
       await conn.beginTransaction();
       const [r] = await conn.query(
         'INSERT INTO orders (user_id, status, total_amount) VALUES (?, ?, ?)',
-        [order.buyerId, 'Pending', Number(order.totalAmount)||0]
+        [order.buyerId, 'Pending', Number(order.totalAmount)]
       );
       const orderId = r.insertId;
       if (Array.isArray(order.items)) {

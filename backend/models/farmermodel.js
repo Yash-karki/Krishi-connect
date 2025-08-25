@@ -6,7 +6,7 @@ const FarmerModel = {
     try {
       const [result] = await conn.query(
         'INSERT INTO products (name, price_per_unit, unit) VALUES (?, ?, ?)',
-        [produce.name, produce.price, produce.unit || 'Kg']
+        [produce.name, produce.price, produce.unit]
       );
       return { insertId: result.insertId };
     } finally {

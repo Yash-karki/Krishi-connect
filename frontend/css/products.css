@@ -277,6 +277,30 @@ body {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
+.product-card.no-products {
+  grid-column: 1 / -1;
+  background: var(--white);
+  border: 2px dashed var(--border-color);
+  min-height: 300px;
+}
+
+.product-card.no-products:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.error-message {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 20px;
+  background: var(--white);
+  border: 2px solid #f44336;
+  border-radius: 12px;
+  color: #f44336;
+  font-weight: 600;
+  font-size: 18px;
+}
+
 .pc-body {
   padding: 20px;
   text-align: center;

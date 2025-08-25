@@ -1,6 +1,7 @@
 // Authentication handling for KrishiConnect
 class Auth {
   constructor() {
+    // Use relative URL for API calls to work with the current server setup
     this.baseURL = '/api';
     this.token = localStorage.getItem('token');
     this.user = JSON.parse(localStorage.getItem('user') || 'null');
@@ -40,6 +41,8 @@ class Auth {
   // Sign up new user
   async signup(userData) {
     try {
+      console.log('Attempting signup with:', { ...userData, password: '[HIDDEN]' });
+      
       const response = await fetch(`${this.baseURL}/users/signup`, {
         method: 'POST',
         headers: {
@@ -48,12 +51,13 @@ class Auth {
         body: JSON.stringify(userData)
       });
 
+      const data = await response.json();
+      
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Signup failed');
+        throw new Error(data.message || `Signup failed: ${response.status}`);
       }
 
-      const data = await response.json();
+      console.log('Signup successful:', { ...data, token: '[HIDDEN]' });
       this.setAuth(data.token, data.user);
       return { success: true, data };
     } catch (error) {
@@ -65,6 +69,8 @@ class Auth {
   // Login user
   async login(credentials) {
     try {
+      console.log('Attempting login with:', { ...credentials, password: '[HIDDEN]' });
+      
       const response = await fetch(`${this.baseURL}/users/login`, {
         method: 'POST',
         headers: {
@@ -73,12 +79,13 @@ class Auth {
         body: JSON.stringify(credentials)
       });
 
+      const data = await response.json();
+      
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Login failed');
+        throw new Error(data.message || `Login failed: ${response.status}`);
       }
 
-      const data = await response.json();
+      console.log('Login successful:', { ...data, token: '[HIDDEN]' });
       this.setAuth(data.token, data.user);
       return { success: true, data };
     } catch (error) {
@@ -89,6 +96,7 @@ class Auth {
 
   // Logout user
   logout() {
+    console.log('Logging out user');
     this.clearAuth();
     window.location.href = 'index.html';
   }
@@ -107,7 +115,8 @@ class Auth {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get profile');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || `Profile fetch failed: ${response.status}`);
       }
 
       const userData = await response.json();
@@ -116,7 +125,7 @@ class Auth {
       return userData;
     } catch (error) {
       console.error('Profile fetch error:', error);
-      if (error.message.includes('Unauthorized')) {
+      if (error.message.includes('401') || error.message.includes('Unauthorized')) {
         this.clearAuth();
         window.location.href = 'signup.html';
       }
@@ -141,6 +150,7 @@ class Auth {
     const response = await fetch(url, { ...options, ...defaultOptions });
     
     if (response.status === 401) {
+      console.log('Token expired, redirecting to login');
       this.clearAuth();
       window.location.href = 'signup.html';
       throw new Error('Authentication expired');
@@ -148,23 +158,47 @@ class Auth {
 
     return response;
   }
+
+  // Validate token on page load
+  async validateToken() {
+    if (!this.token) {
+      return false;
+    }
+
+    try {
+      await this.getProfile();
+      return true;
+    } catch (error) {
+      console.log('Token validation failed:', error.message);
+      this.clearAuth();
+      return false;
+    }
+  }
 }
 
 // Initialize global auth instance
 window.KrishiAuth = new Auth();
 
 // Auto-redirect if user is already authenticated
-document.addEventListener('DOMContentLoaded', function() {
-  if (window.KrishiAuth.isAuthenticated()) {
+document.addEventListener('DOMContentLoaded', async function() {
+  console.log('DOM loaded, checking authentication status');
+  
+  const isAuthenticated = await window.KrishiAuth.validateToken();
+  
+  if (isAuthenticated) {
+    console.log('User is authenticated, checking page access');
     // If on auth page, redirect to dashboard
     if (window.location.pathname.includes('signup.html')) {
+      console.log('Redirecting from auth page to dashboard');
       window.location.href = 'dashboard.html';
     }
   } else {
+    console.log('User is not authenticated, checking page access');
     // If on protected page, redirect to auth
     const protectedPages = ['dashboard.html', 'waste.html', 'cart.html'];
     const currentPage = window.location.pathname.split('/').pop();
     if (protectedPages.includes(currentPage)) {
+      console.log('Redirecting from protected page to auth');
       window.location.href = 'signup.html';
     }
   }

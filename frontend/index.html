@@ -38,10 +38,10 @@
       <div class="hero-copy">
         <h1>Direct from Farmers to You</h1>
         <p class="sub">Buy fresh, high-quality agricultural products directly from farmers</p>
-        <form class="search" id="search-form">
+        <!-- <form class="search" id="search-form">
           <input id="search-input" type="text" placeholder="Search products" aria-label="Search products" />
           <button type="submit" class="btn btn-amber">Search</button>
-        </form>
+        </form> -->
         <div class="cta-row">
           <a class="btn btn-success" href="products.html">Buy Produce</a>
           <a class="btn btn-amber-outline" href="waste.html">Sell Produce/Waste</a>
@@ -87,7 +87,7 @@
       if (window.KrishiAuth && window.KrishiAuth.isAuthenticated()) {
         const user = window.KrishiAuth.getCurrentUser();
         if (user) {
-          document.getElementById('userName').textContent = `Welcome, ${user.name}`;
+          document.getElementById('userName').textContent = `Welcome, ${user.email}`;
           document.getElementById('userInfo').style.display = 'inline';
           document.getElementById('authLinks').style.display = 'none';
           
