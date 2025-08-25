@@ -3,54 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>कृषिConnect</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>Authentication</title>
+  <link rel="stylesheet" href="css/signup.css">
 </head>
 <body>
   <!-- Header -->
-  <header>
-    <div class="logo-tab">कृषि<strong>Connect</strong></div>
+  <header class="site-header">
+    <div class="container header-wrap">
+      <div class="brand">
+        <span class="logo-text">कृषि</span><span class="logo-strong">Connect</span>
   </header>
-  <hr class="partition">
 
-  <!-- Main Section -->
-  <div class="container">
-    <!-- Left: Farmer Image -->
-    <div class="image-section">
-      <img src="assetes/WhatsApp Image 2025-08-24 at 12.28.42_4c875f8b.jpg" alt="Farmer">
-    </div>
+  <!-- Auth Section -->
+  <main class="auth-section">
+    <div class="auth-card">
+      <div class="auth-tabs">
+        <a href="#login" class="tab-btn active">log In</a>
+        <a href="#signup" class="tab-btn">Sign Up</a>
+      </div>
 
-    <!-- Right: Login Form -->
-    <div class="form-section">
-      <form action="/login" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="email">Email ID:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-
-        <p class="alt-signin">Or log in with</p>
-        <div class="social-icons">
-          <span>
-            <img src="assetes/google-brands-solid-full.svg" alt="Google">
-          </span>
-          <span>
-            <img src="assetes/twitter-brands-solid-full.svg" alt="Twitter">
-          </span>
-          <span>
-            <img src="assetes/linkedin-in-brands-solid-full.svg" alt="LinkedIn">
-          </span>
+      <!-- Sign In Form -->
+      <div class="auth-form" id="signin">
+        <h2>Welcome Back</h2>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="you@example.com" required>
         </div>
-        <p style="margin-top:10px;">
-          Create new account <a href="signup.html">click here</a>
-        </p>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" placeholder="Enter password" required>
+        </div>
+        <button class="btn btn-primary w-full">Sign In</button>
+      </div>
 
-        <button type="submit" class="signin-btn">Log in</button>
-      </form>
+      <!-- Sign Up Form -->
+      <div class="auth-form hidden" id="signup">
+        <h2>Create Account</h2>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="John Doe" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" placeholder="Enter password" required>
+        </div>
+        <button class="btn btn-success w-full">Sign Up</button>
+      </div>
     </div>
-  </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <p>© 2025 GreenMarket. All rights reserved.</p>
+      <div class="social">
+        <img src="assets/icons/google-brands-solid-full.svg" alt="Google">
+        <img src="assets/icons/twitter-brands-solid-full.svg" alt="twitter">
+        <img src="assets/icons/linkedin-in-brands-solid-full.svg" alt="LinkedIn">
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
