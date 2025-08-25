@@ -5,7 +5,7 @@ const FarmerModel = {
     const conn = await getConnection();
     try {
       const sql = `
-        INSERT INTO PRODUCE (PRODUCE_ID, FARMER_ID, NAME, QUANTITY, PRICE)
+        INSERT INTO PRODUCE (Produce_ID, Farmer_ID, Name, Quantity, Price)
         VALUES (PRODUCE_SEQ.NEXTVAL, :farmerId, :name, :quantity, :price)
       `;
       const result = await conn.execute(sql, produce, { autoCommit: true });
@@ -19,7 +19,7 @@ const FarmerModel = {
     const conn = await getConnection();
     try {
       const result = await conn.execute(
-        `SELECT * FROM PRODUCE WHERE FARMER_ID = :farmerId`,
+        `SELECT * FROM PRODUCE WHERE Farmer_ID = :farmerId`,
         { farmerId }
       );
       return result.rows;

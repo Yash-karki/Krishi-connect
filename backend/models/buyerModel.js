@@ -5,7 +5,7 @@ const BuyerModel = {
     const conn = await getConnection();
     try {
       const result = await conn.execute(
-        `SELECT * FROM ORDERS WHERE BUYER_ID = :buyerId`,
+        `SELECT * FROM ORDERS WHERE Buyer_ID = :buyerId`,
         { buyerId }
       );
       return result.rows;
@@ -18,7 +18,7 @@ const BuyerModel = {
     const conn = await getConnection();
     try {
       const sql = `
-        INSERT INTO ORDERS (ORDER_ID, BUYER_ID, PRODUCE_ID, QUANTITY, STATUS)
+        INSERT INTO ORDERS (Order_Id, Buyer_ID, Produce_ID, Quantity, Status)
         VALUES (ORDER_SEQ.NEXTVAL, :buyerId, :produceId, :quantity, 'Pending')
       `;
       const result = await conn.execute(sql, order, { autoCommit: true });

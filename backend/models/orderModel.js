@@ -5,7 +5,7 @@ const OrderModel = {
     const conn = await getConnection();
     try {
       const result = await conn.execute(
-        `UPDATE ORDERS SET STATUS = :status WHERE ORDER_ID = :orderId`,
+        `UPDATE ORDERS SET STATUS = :status WHERE Order_ID = :orderId`,
         { status, orderId },
         { autoCommit: true }
       );
