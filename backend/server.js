@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const session = require("express-session");
 const path = require("path");
 
-const User = require("./models/User");
+const User = require("./models/user");
 
 const app = express();
 
