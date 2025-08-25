@@ -1,0 +1,121 @@
+/* General */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f9fff9;
+  color: #333;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: white;
+  border-bottom: 1px solid #eee;
+}
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #2e7d32;
+}
+.logo span {
+  color: #388e3c;
+}
+nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+.auth-buttons .login {
+  background: transparent;
+  border: 1px solid #388e3c;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.auth-buttons .register {
+  background: #388e3c;
+  border: none;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 6px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+/* Cart */
+.cart-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+}
+.cart-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Cart Items */
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.cart-item img {
+  width: 80px;
+  border-radius: 8px;
+}
+.item-details {
+  flex: 1;
+  margin-left: 15px;
+}
+.item-details h3 {
+  margin: 0;
+}
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.quantity-control button {
+  background: #388e3c;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Cart Summary */
+.cart-summary {
+  margin-top: 30px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  text-align: center;
+}
+.cart-summary h2 {
+  margin-bottom: 15px;
+}
+.checkout {
+  margin-top: 15px;
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}

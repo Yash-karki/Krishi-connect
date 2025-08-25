@@ -1,0 +1,99 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f9fff9;
+  display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 230px;
+  background: #2e7d32;
+  color: white;
+  min-height: 100vh;
+  padding: 20px;
+}
+.sidebar .logo {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+.sidebar .logo span {
+  color: #ffcc00;
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+.sidebar ul li {
+  padding: 12px 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.sidebar ul li:hover,
+.sidebar ul li.active {
+  background: #388e3c;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Topbar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.user-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.user-box img {
+  width: 40px;
+  border-radius: 50%;
+}
+
+/* Cards */
+.overview {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+.card {
+  background: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.card h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.card p {
+  font-size: 22px;
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+/* Analytics */
+.analytics {
+  margin-top: 40px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.analytics h2 {
+  margin-bottom: 20px;
+}

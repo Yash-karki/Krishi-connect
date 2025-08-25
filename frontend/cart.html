@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart - कृषिConnect</title>
+  <link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">कृषि<span>Connect</span></div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="buy.html">Buy Produce</a>
+      <a href="sell.html">Sell Produce/Waste</a>
+      <a href="about.html">About Us</a>
+    </nav>
+    <div class="auth-buttons">
+      <button class="login">Login</button>
+      <button class="register">Register</button>
+    </div>
+  </header>
+
+  <!-- Cart Section -->
+  <section class="cart-container">
+    <h1>Your Shopping Cart</h1>
+    <div class="cart-items" id="cartItems">
+      <!-- Dynamic JS render -->
+    </div>
+
+    <!-- Cart Summary -->
+    <div class="cart-summary">
+      <h2>Order Summary</h2>
+      <p>Total Items: <span id="totalItems">0</span></p>
+      <p>Total Price: ₹<span id="totalPrice">0</span></p>
+      <button class="checkout">Proceed to Checkout</button>
+    </div>
+  </section>
+
+  <script src="js/cart.js"></script>
+</body>
+</html>
