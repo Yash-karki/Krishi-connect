@@ -41,3 +41,5 @@ INSERT INTO products (name, price_per_unit, unit) VALUES
 ('Organic Potatoes', 30.00, 'Kg'),
 ('Green Peas', 80.00, 'Kg'),
 ('Carrots', 40.00, 'Kg');
+
+
