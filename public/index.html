@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>कृषिConnect</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo-tab">कृषि<strong>Connect</strong></div>
+  </header>
+  <hr class="partition">
+
+  <!-- Main Section -->
+  <div class="container">
+    <!-- Left: Farmer Image -->
+    <div class="image-section">
+      <img src="assetes/WhatsApp Image 2025-08-24 at 12.28.42_4c875f8b.jpg" alt="Farmer">
+    </div>
+
+    <!-- Right: Login Form -->
+    <div class="form-section">
+      <form action="/login" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email ID:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <p class="alt-signin">Or log in with</p>
+        <div class="social-icons">
+          <span>
+            <img src="assetes/google-brands-solid-full.svg" alt="Google">
+          </span>
+          <span>
+            <img src="assetes/twitter-brands-solid-full.svg" alt="Twitter">
+          </span>
+          <span>
+            <img src="assetes/linkedin-in-brands-solid-full.svg" alt="LinkedIn">
+          </span>
+        </div>
+        <p style="margin-top:10px;">
+          Create new account <a href="signup.html">click here</a>
+        </p>
+
+        <button type="submit" class="signin-btn">Log in</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

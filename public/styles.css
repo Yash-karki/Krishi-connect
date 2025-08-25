@@ -1,0 +1,126 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #fff;
+  color: #2f2f2f;
+}
+
+/* Header */
+header {
+  background: #fff;
+  padding: 15px 25px;
+}
+
+.logo-tab {
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(180deg, #58b956, #3a8f3a);
+  padding: 8px 25px;
+  border-radius: 40px;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.4),
+              0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Partition Line */
+.partition {
+  border: none;
+  border-top: 1px solid #cfcfcf;
+}
+
+/* Main Section */
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 0 20px;
+  gap: 20px;
+}
+
+/* Image Section */
+.image-section img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Form Section */
+.form-section {
+  background: #e6ffe6;
+  padding: 20px;
+  border-radius: 6px;
+  width: 350px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.alt-signin {
+  text-align: center;
+  font-size: 1.0 rem;
+  margin: 10px 0 3px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.social-icons span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border: 1px solid #2f2f2f;
+  border-radius: 50%;
+  cursor: pointer;
+  background: #fff;
+}
+
+.social-icons span img {
+  width: 18px;
+  height: 18px;
+}
+
+.signin-btn {
+  background: #3a8f3a;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+  transition: background 0.3s;
+}
+
+.signin-btn:hover {
+  background: #2e6d2e;
+}
