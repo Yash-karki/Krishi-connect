@@ -64,6 +64,10 @@ body {
 }
 
 .auth { display: flex; align-items: center; gap: 12px; }
+.auth #userInfo { display: flex; align-items: center; gap: 10px; }
+.auth #userName { color: var(--green-700); font-weight: 500; }
+.logout-btn { background: #f44336; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 14px; transition: background 0.3s; }
+.logout-btn:hover { background: #d32f2f; }
 .link { color: var(--text-900); text-decoration: none; font-weight: 500; }
 
 .btn {

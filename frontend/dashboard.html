@@ -24,6 +24,7 @@
       <div class="user-box">
         <span id="username">User</span>
         <img src="https://i.ibb.co/PhbPWhK/farmer-avatar.png" alt="User Avatar">
+        <button id="logoutBtn" class="logout-btn">Logout</button>
       </div>
     </header>
 
@@ -33,12 +34,33 @@
     </section>
   </main>
 
+  <script src="js/auth.js"></script>
   <script src="js/dashboard.js"></script>
   <script>
     // quick nav hookup
     (function(){
       var logo = document.querySelector('.logo');
       if(logo){ logo.style.cursor = 'pointer'; logo.addEventListener('click', function(){ window.location.href = 'index.html'; }); }
+      
+      // Load user data and setup logout
+      if (window.KrishiAuth && window.KrishiAuth.isAuthenticated()) {
+        const user = window.KrishiAuth.getCurrentUser();
+        if (user) {
+          document.getElementById('username').textContent = user.name || 'User';
+          document.getElementById('welcomeText').textContent = `Welcome ${user.name || 'User'} 👨‍🌾`;
+        }
+        
+        // Setup logout button
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+          logoutBtn.addEventListener('click', function() {
+            window.KrishiAuth.logout();
+          });
+        }
+      } else {
+        // Redirect to login if not authenticated
+        window.location.href = 'signup.html';
+      }
     })();
   </script>
 </body>

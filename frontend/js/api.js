@@ -2,23 +2,13 @@
 (function(global){
   var API_BASE = '';
 
-  function getJSON(url){
-    return fetch(url).then(function(r){ return r.json(); });
+  function getJSON(url, opts){
+    return fetch(url, opts || {}).then(function(r){ return r.json(); });
   }
 
   function listProducts(query){
-    // Placeholder static data while backend endpoints are empty
-    var data = [
-      { id: 1, name: 'Organic Spinach', price: 50, unit: 'Kg' },
-      { id: 2, name: 'Fresh Tomatoes', price: 40, unit: 'Kg' },
-      { id: 3, name: 'Golden Wheat', price: 32, unit: 'Kg' },
-      { id: 4, name: 'Basmati Rice', price: 65, unit: 'Kg' }
-    ];
-    if(query){
-      var q = query.toLowerCase();
-      data = data.filter(function(p){ return p.name.toLowerCase().indexOf(q) !== -1; });
-    }
-    return Promise.resolve(data);
+    var qs = query ? ('?q='+encodeURIComponent(query)) : '';
+    return getJSON('/api/products'+qs);
   }
 
   function getCart(){

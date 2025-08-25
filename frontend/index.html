@@ -21,8 +21,14 @@
         <a href="dashboard.html">Dashboard</a>
       </nav>
       <div class="auth">
-        <a class="link" href="signup.html">sign in</a>
-        <a class="btn btn-primary" href="signup.html">sign up</a>
+        <span id="userInfo" style="display: none;">
+          <span id="userName"></span>
+          <button id="logoutBtn" class="logout-btn">Logout</button>
+        </span>
+        <div id="authLinks">
+          <a class="link" href="signup.html">sign in</a>
+          <a class="btn btn-primary" href="signup.html">sign up</a>
+        </div>
       </div>
     </div>
   </header>
@@ -72,7 +78,29 @@
 
 
 
+  <script src="js/auth.js"></script>
   <script src="js/main.js"></script>
   <script src="js/auth-guard.js"></script>
+  <script>
+    // Setup authentication UI
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.KrishiAuth && window.KrishiAuth.isAuthenticated()) {
+        const user = window.KrishiAuth.getCurrentUser();
+        if (user) {
+          document.getElementById('userName').textContent = `Welcome, ${user.name}`;
+          document.getElementById('userInfo').style.display = 'inline';
+          document.getElementById('authLinks').style.display = 'none';
+          
+          // Setup logout button
+          const logoutBtn = document.getElementById('logoutBtn');
+          if (logoutBtn) {
+            logoutBtn.addEventListener('click', function() {
+              window.KrishiAuth.logout();
+            });
+          }
+        }
+      }
+    });
+  </script>
 </body>
 </html>

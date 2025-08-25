@@ -74,6 +74,7 @@
       </div>
     </div>
   </footer>
+  <script src="js/auth.js"></script>
   <script>
     (function(){
       var tabs = document.querySelectorAll('.auth-tabs .tab-btn');
@@ -91,8 +92,66 @@
 
       var btnLogin = document.getElementById('btnLogin');
       var btnSignup = document.getElementById('btnSignup');
-      if(btnLogin){ btnLogin.addEventListener('click', function(){ window.location.href = 'dashboard.html'; }); }
-      if(btnSignup){ btnSignup.addEventListener('click', function(){ window.location.href = 'dashboard.html'; }); }
+      // Handle login
+      if(btnLogin) {
+        btnLogin.addEventListener('click', async function() {
+          const email = document.getElementById('loginEmail').value;
+          const password = document.getElementById('loginPassword').value;
+          
+          if (!email || !password) {
+            alert('Please fill in all fields');
+            return;
+          }
+          
+          btnLogin.disabled = true;
+          btnLogin.textContent = 'Signing In...';
+          
+          try {
+            const result = await window.KrishiAuth.login({ email, password });
+            if (result.success) {
+              window.location.href = 'index.html';
+            } else {
+              alert(result.error || 'Login failed');
+            }
+          } catch (error) {
+            alert('Login failed: ' + error.message);
+          } finally {
+            btnLogin.disabled = false;
+            btnLogin.textContent = 'Sign In';
+          }
+        });
+      }
+      
+      // Handle signup
+      if(btnSignup) {
+        btnSignup.addEventListener('click', async function() {
+          const name = document.getElementById('signupName').value;
+          const email = document.getElementById('signupEmail').value;
+          const password = document.getElementById('signupPassword').value;
+          
+          if (!name || !email || !password) {
+            alert('Please fill in all fields');
+            return;
+          }
+          
+          btnSignup.disabled = true;
+          btnSignup.textContent = 'Creating Account...';
+          
+          try {
+            const result = await window.KrishiAuth.signup({ name, email, password });
+            if (result.success) {
+              window.location.href = 'dashboard.html';
+            } else {
+              alert(result.error || 'Signup failed');
+            }
+          } catch (error) {
+            alert('Signup failed: ' + error.message);
+          } finally {
+            btnSignup.disabled = false;
+            btnSignup.textContent = 'Sign Up';
+          }
+        });
+      }
     })();
   </script>
 </body>
