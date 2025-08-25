@@ -4,53 +4,85 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>कृषिConnect</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="logo-tab">कृषि<strong>Connect</strong></div>
+  <header class="site-header">
+    <div class="container header-wrap">
+      <div class="brand">
+        <span class="logo-text">कृषि</span><span class="logo-strong">Connect</span>
+      </div>
+      <nav class="nav">
+        <a href="products.html">Buy Produce</a>
+        <a href="waste.html">Sell Produce/Waste</a>
+        <a href="#about">About Us</a>
+      </nav>
+      <div class="auth">
+        <a class="link" href="signin.html">sign in</a>
+        <a class="btn btn-primary" href="signup.html">sign up</a>
+      </div>
+    </div>
   </header>
-  <hr class="partition">
 
-  <!-- Main Section -->
-  <div class="container">
-    <!-- Left: Farmer Image -->
-    <div class="image-section">
-      <img src="assetes/WhatsApp Image 2025-08-24 at 12.28.42_4c875f8b.jpg" alt="Farmer">
-    </div>
-
-    <!-- Right: Login Form -->
-    <div class="form-section">
-      <form action="/login" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="email">Email ID:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-
-        <p class="alt-signin">Or log in with</p>
-        <div class="social-icons">
-          <span>
-            <img src="assetes/google-brands-solid-full.svg" alt="Google">
-          </span>
-          <span>
-            <img src="assetes/twitter-brands-solid-full.svg" alt="Twitter">
-          </span>
-          <span>
-            <img src="assetes/linkedin-in-brands-solid-full.svg" alt="LinkedIn">
-          </span>
+  <main class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h1>Direct from Farmers to You</h1>
+        <p class="sub">Buy fresh, high-quality agricultural products directly from farmers</p>
+        <form class="search" id="search-form">
+          <input id="search-input" type="text" placeholder="Search products" aria-label="Search products" />
+          <button type="submit" class="btn btn-amber">Search</button>
+        </form>
+        <div class="cta-row">
+          <a class="btn btn-success" href="products.html">Buy Produce</a>
+          <a class="btn btn-amber-outline" href="waste.html">Sell Produce/Waste</a>
         </div>
-        <p style="margin-top:10px;">
-          Create new account <a href="signup.html">click here</a>
-        </p>
-
-        <button type="submit" class="signin-btn">Log in</button>
-      </form>
+      </div>
+      <div class="hero-art">
+        <img src="assets/images/WhatsApp Image 2025-08-24 at 12.28.42_4c875f8b.jpg" alt="Fresh greens" />
+      </div>
     </div>
-  </div>
+  </main>
+
+  <section class="how">
+    <div class="container">
+      <h2>How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-icon">🧺</div>
+          <div class="step-title">Find Products</div>
+          <p>Search and select from a wide range of products</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">👨‍🌾</div>
+          <div class="step-title">Direct Purchase</div>
+          <p>Buy directly from farmers</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">📦</div>
+          <div class="step-title">Track Orders</div>
+          <p>Track your orders, and get them delivered</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <div class="brand small">
+        <span class="logo-text">कृषि</span><span class="logo-strong">Connect</span>
+      </div>
+      <div class="social">
+        <img src="assets/icons/google-brands-solid-full.svg" alt="Google" />
+        <img src="assets/icons/twitter-brands-solid-full.svg" alt="Twitter" />
+        <img src="assets/icons/linkedin-in-brands-solid-full.svg" alt="LinkedIn" />
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
