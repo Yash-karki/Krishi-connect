@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   } else {
     // If on protected page, redirect to auth
-    const protectedPages = ['dashboard.html', 'products.html', 'waste.html', 'cart.html'];
+    const protectedPages = ['dashboard.html', 'waste.html', 'cart.html'];
     const currentPage = window.location.pathname.split('/').pop();
     if (protectedPages.includes(currentPage)) {
       window.location.href = 'signup.html';

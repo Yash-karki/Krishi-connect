@@ -16,10 +16,20 @@
         <a href="index.html" class="brand-link"><span class="logo-text">कृषि</span><span class="logo-strong">Connect</span></a>
       </div>
       <nav class="nav">
-        <a href="products.html" class="active">Buy Produce</a>
-        <a href="waste.html">Sell Produce/Waste</a>
-        <a href="dashboard.html">Dashboard</a>
+        <a href="index.html">Home</a>
+        <a href="waste.html">Farmers</a>
+        <a href="products.html" class="active">Market</a>
+        <a href="dashboard.html">Transport</a>
       </nav>
+      <div class="search-icon">🔍</div>
+      <div class="action-buttons">
+        <button class="btn btn-primary">💳 Online Payment</button>
+        <button class="btn btn-success">💬 Chat with farmers</button>
+      </div>
+      <div class="cart-section">
+        <span class="cart-icon">🛒</span>
+        <span>cart</span>
+      </div>
       <div class="auth">
         <span id="userInfo" style="display: none;">
           <span id="userName"></span>
@@ -34,10 +44,12 @@
   </header>
 
   <main class="products-page container">
+    <h1 class="page-title">Marketplace</h1>
+    
     <div class="products-topbar">
       <form id="products-search" class="search">
         <input id="q" type="text" placeholder="Search products" aria-label="Search products" />
-        <button type="submit" class="btn btn-amber">Search</button>
+        <button type="submit" class="btn btn-success">Search</button>
       </form>
       <a href="cart.html" class="btn btn-success" id="cartLink">Cart (0)</a>
     </div>

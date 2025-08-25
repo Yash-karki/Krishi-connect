@@ -15,13 +15,26 @@
   function render(products){
     if(!grid) return;
     grid.innerHTML = '';
+    
+    // If no products, show placeholder cards like in the image
+    if (!products || products.length === 0) {
+      for (var i = 0; i < 9; i++) {
+        var card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = '<div class="pc-body"></div>';
+        grid.appendChild(card);
+      }
+      return;
+    }
+    
     products.forEach(function(p){
       var card = document.createElement('div');
       card.className = 'product-card';
       card.innerHTML =
         '<div class="pc-body">'
-        + '<h3>'+p.name+'</h3>'
-        + '<p class="muted">'+ (p.unit||'Kg') +'</p>'
+        + '<div class="product-image">🥬</div>'
+        + '<h3 class="product-title">'+p.name+'</h3>'
+        + '<p class="product-description">'+ (p.unit||'Kg') +'</p>'
         + '<p class="price">₹'+p.price+' / '+(p.unit||'Kg')+'</p>'
         + '<div class="actions">'
         +   '<button class="btn btn-success" data-id="'+p.id+'">Add to Cart</button>'

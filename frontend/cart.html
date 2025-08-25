@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cart - कृषिConnect</title>
   <link rel="stylesheet" href="css/cart.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="site-header">
@@ -32,21 +35,44 @@
 
   <!-- Cart Section -->
   <section class="cart-container">
-    <h1>Your Shopping Cart</h1>
-    <div class="cart-items" id="cartItems">
-      <!-- Dynamic JS render -->
+    <!-- Left Column - Product List -->
+    <div class="cart-items">
+      <div class="cart-header">
+        <div>Product</div>
+        <div>Qnt</div>
+        <div>Price</div>
+      </div>
+      <div id="cartItems">
+        <!-- Dynamic JS render -->
+      </div>
     </div>
 
-    <!-- Cart Summary -->
+    <!-- Right Column - Cart Summary -->
     <div class="cart-summary">
-      <h2>Order Summary</h2>
-      <p>Total Items: <span id="totalItems">0</span></p>
-      <p>Total Price: ₹<span id="totalPrice">0</span></p>
-      <button class="checkout">Proceed to Checkout</button>
+      <h2>my cart</h2>
+      <div class="cart-total">
+        cart total <span class="amount">₹<span id="totalPrice">0</span></span>
+      </div>
+      <div class="shipping-note">
+        shipping and taxes calculated at check out
+      </div>
+      
+      <div class="terms-section">
+        <div class="terms-checkbox">
+          <input type="checkbox" id="termsCheck">
+          <div class="terms-text">
+            i agree to <a href="#" class="terms-link">terms & conditions</a>
+          </div>
+        </div>
+      </div>
+      
+      <button class="checkout" id="checkoutBtn">checkout</button>
+      
+      <div class="cart-icon">
+        🛒
+      </div>
     </div>
   </section>
-
-
 
   <script src="js/auth.js"></script>
   <script src="js/api.js"></script>

@@ -8,6 +8,9 @@
   --text-600: #4b5563;
   --border: #e5e7eb;
   --bg: #ffffff;
+  --brand-orange: #ff6b35;
+  --brand-brown: #f4a261;
+  --brand-teal: #264653;
 }
 
 body {
@@ -15,6 +18,7 @@ body {
   color: var(--text-900);
   background: var(--bg);
   margin: 0;
+  min-height: 100vh;
 }
 
 /* Container */
@@ -62,87 +66,176 @@ body {
   text-decoration: none;
   border: 1px solid transparent;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
-.btn-primary { background: var(--green-600); color: #fff; }
-.btn-primary:hover { background: var(--green-700); }
+.btn-primary { background: var(--brand-brown); color: #fff; }
+.btn-primary:hover { background: #e0915a; }
 .btn-success { background: var(--green-600); color: #fff; }
 .btn-success:hover { background: var(--green-700); }
 .w-full { width: 100%; }
 
-/* Auth Section */
+/* Auth Section - Two Column Layout */
 .auth-section {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
-  padding: 40px 20px;
+  min-height: calc(100vh - 68px);
 }
 
+/* Left Column - Login Form */
 .auth-card {
+  flex: 1;
   background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 28px;
-  width: 100%;
-  max-width: 420px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
 }
 
 .auth-tabs {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
+  display: none; /* Hide tabs for single form view */
 }
-.tab-btn {
-  flex: 1;
-  text-align: center;
-  padding: 12px;
-  border: 1px solid var(--border);
-  background: #f9fafb;
-  font-weight: 600;
-  text-decoration: none;
-  color: var(--text-900);
-  border-radius: 10px;
-}
-.tab-btn.active,
-.tab-btn:hover {
-  background: var(--green-600);
-  color: #fff;
-  border-color: var(--green-600);
+
+.auth-form {
+  width: 100%;
+  max-width: 400px;
 }
 
 .auth-form h2 {
-  font-size: 22px;
-  margin-bottom: 18px;
+  font-size: 28px;
+  margin-bottom: 30px;
   text-align: center;
+  color: var(--brand-teal);
+  font-weight: 700;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-bottom: 14px;
+  gap: 8px;
+  margin-bottom: 20px;
 }
+
 .form-group label {
-  font-size: 14px;
-  color: var(--text-600);
+  font-size: 16px;
+  color: var(--brand-teal);
+  font-weight: 600;
 }
+
 .form-group input {
-  padding: 12px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  font-size: 15px;
+  padding: 15px;
+  border: 2px solid var(--brand-teal);
+  border-radius: 8px;
+  font-size: 16px;
+  background: #fff;
 }
+
 .form-group input:focus {
-  border-color: var(--green-600);
+  border-color: var(--brand-teal);
   outline: none;
-  box-shadow: 0 0 0 2px rgba(34,160,84,0.2);
+  box-shadow: 0 0 0 3px rgba(38, 70, 83, 0.1);
 }
+
+/* Forget Password Link */
+.forget-password {
+  text-align: center;
+  margin: 15px 0 25px 0;
+}
+
+.forget-password a {
+  color: var(--brand-orange);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Button Row */
+.button-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.button-row .btn {
+  flex: 1;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Create Account Link */
+.create-account {
+  text-align: center;
+}
+
+.create-account a {
+  color: var(--brand-orange);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Back to Login Link */
+.back-to-login {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.back-to-login a {
+  color: var(--brand-orange);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Right Column - Branding */
+.branding-section {
+  flex: 1;
+  background: var(--brand-brown);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  position: relative;
+}
+
+.branding-content {
+  text-align: center;
+  color: #fff;
+}
+
+.branding-icon {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+}
+
+.branding-text {
+  font-size: 48px;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.branding-text .devanagari {
+  font-family: 'Noto Sans Devanagari', Arial, sans-serif;
+}
+
+/* Hide second form by default */
+.hidden { display: none; }
 
 /* Footer */
 .site-footer {
   border-top: 1px solid var(--border);
   padding: 18px 0;
+  background: #fff;
 }
 .footer-wrap {
   display: flex;
@@ -152,5 +245,28 @@ body {
 .social { display: flex; gap: 10px; }
 .social img { width: 22px; height: 22px; }
 
-/* Hide second form by default */
-.hidden { display: none; }
+/* Responsive Design */
+@media (max-width: 768px) {
+  .auth-section {
+    flex-direction: column;
+  }
+  
+  .branding-section {
+    order: -1;
+    min-height: 200px;
+  }
+  
+  .auth-card {
+    min-height: 400px;
+  }
+  
+  .branding-text {
+    font-size: 36px;
+  }
+  
+  .branding-icon {
+    width: 80px;
+    height: 80px;
+    font-size: 40px;
+  }
+}

@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Authentication</title>
   <link rel="stylesheet" href="css/signup.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Header -->
@@ -23,24 +26,29 @@
 
   <!-- Auth Section -->
   <main class="auth-section">
+    <!-- Left Column - Login Form -->
     <div class="auth-card">
-      <div class="auth-tabs">
-        <a href="#signin" class="tab-btn active">Log In</a>
-        <a href="#signup" class="tab-btn">Sign Up</a>
-      </div>
-
       <!-- Sign In Form -->
       <div class="auth-form" id="signin">
-        <h2>Welcome Back</h2>
+        <h2>Login Here!</h2>
         <div class="form-group">
-          <label>Email</label>
-          <input id="loginEmail" type="email" placeholder="you@example.com" required>
+          <label>User Name</label>
+          <input id="loginEmail" type="email" placeholder="Enter your username" required>
         </div>
         <div class="form-group">
           <label>Password</label>
-          <input id="loginPassword" type="password" placeholder="Enter password" required>
+          <input id="loginPassword" type="password" placeholder="Enter your password" required>
         </div>
-        <button id="btnLogin" class="btn btn-primary w-full">Sign In</button>
+        <div class="forget-password">
+          <a href="#">Forget Password</a>
+        </div>
+        <div class="button-row">
+          <button id="btnLogin" class="btn btn-primary">Login</button>
+          <button id="btnSignup" class="btn btn-success">Sign up</button>
+        </div>
+        <div class="create-account">
+          <a href="#">Create Account</a>
+        </div>
       </div>
 
       <!-- Sign Up Form -->
@@ -58,7 +66,22 @@
           <label>Password</label>
           <input id="signupPassword" type="password" placeholder="Enter password" required>
         </div>
-        <button id="btnSignup" class="btn btn-success w-full">Sign Up</button>
+        <button id="btnSignupForm" class="btn btn-success w-full">Sign Up</button>
+        <div class="back-to-login">
+          <a href="#" id="backToLogin">← Back to Login</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column - Branding -->
+    <div class="branding-section">
+      <div class="branding-content">
+        <div class="branding-icon">
+          🚜
+        </div>
+        <div class="branding-text">
+          <span class="devanagari">कृषि</span> Connect
+        </div>
       </div>
     </div>
   </main>
@@ -92,6 +115,8 @@
 
       var btnLogin = document.getElementById('btnLogin');
       var btnSignup = document.getElementById('btnSignup');
+      var btnSignupForm = document.getElementById('btnSignupForm');
+      
       // Handle login
       if(btnLogin) {
         btnLogin.addEventListener('click', async function() {
@@ -117,14 +142,22 @@
             alert('Login failed: ' + error.message);
           } finally {
             btnLogin.disabled = false;
-            btnLogin.textContent = 'Sign In';
+            btnLogin.textContent = 'Login';
           }
         });
       }
       
-      // Handle signup
+      // Handle signup button in login form (switches to signup form)
       if(btnSignup) {
-        btnSignup.addEventListener('click', async function() {
+        btnSignup.addEventListener('click', function() {
+          document.getElementById('signin').classList.add('hidden');
+          document.getElementById('signup').classList.remove('hidden');
+        });
+      }
+      
+      // Handle signup form submission
+      if(btnSignupForm) {
+        btnSignupForm.addEventListener('click', async function() {
           const name = document.getElementById('signupName').value;
           const email = document.getElementById('signupEmail').value;
           const password = document.getElementById('signupPassword').value;
@@ -134,8 +167,8 @@
             return;
           }
           
-          btnSignup.disabled = true;
-          btnSignup.textContent = 'Creating Account...';
+          btnSignupForm.disabled = true;
+          btnSignupForm.textContent = 'Creating Account...';
           
           try {
             const result = await window.KrishiAuth.signup({ name, email, password });
@@ -147,9 +180,19 @@
           } catch (error) {
             alert('Signup failed: ' + error.message);
           } finally {
-            btnSignup.disabled = false;
-            btnSignup.textContent = 'Sign Up';
+            btnSignupForm.disabled = false;
+            btnSignupForm.textContent = 'Sign Up';
           }
+        });
+      }
+      
+      // Handle back to login
+      var backToLogin = document.getElementById('backToLogin');
+      if(backToLogin) {
+        backToLogin.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.getElementById('signup').classList.add('hidden');
+          document.getElementById('signin').classList.remove('hidden');
         });
       }
     })();

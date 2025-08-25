@@ -1,6 +1,6 @@
 (function(){
   try{
-    var publicPaths = ['signup.html'];
+    var publicPaths = ['signup.html', 'products.html', 'index.html'];
     var path = (location.pathname.split('/').pop() || '').toLowerCase();
     if(publicPaths.indexOf(path) !== -1) return;
     var token = localStorage.getItem('token');
