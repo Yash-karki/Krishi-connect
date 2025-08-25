@@ -1,0 +1,33 @@
+.container{max-width:1100px;margin:0 auto;padding:0 16px}
+.site-header{border-bottom:1px solid #eee}
+.header-wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand .logo-text{font-weight:600;color:#2e7d32}
+.brand .logo-strong{font-weight:800;color:#1b5e20}
+.nav a{margin:0 8px;color:#222;text-decoration:none}
+.nav a.active{color:#1b5e20;font-weight:600}
+.auth .btn{margin-left:8px}
+.btn{display:inline-block;padding:10px 14px;border-radius:8px;border:1px solid transparent;cursor:pointer;text-decoration:none}
+.btn-primary{background:#1b5e20;color:#fff}
+.btn-success{background:#2e7d32;color:#fff}
+.btn-amber{background:#ffb300;color:#000}
+.btn-amber-outline{background:#fff;border:1px solid #ffb300;color:#ff8f00}
+.products-page{padding:24px 0}
+.products-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.search{display:flex;gap:8px}
+.search input{padding:10px 12px;border:1px solid #ddd;border-radius:8px;min-width:260px}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;padding-bottom:24px}
+.product-card{border:1px solid #eee;border-radius:12px;overflow:hidden;background:#fff}
+.pc-body{padding:14px}
+.muted{color:#666;font-size:14px}
+.price{font-weight:700;margin:8px 0}
+.actions .btn{width:100%}
+.sell-section{padding:24px 0}
+.sell-form{border:1px solid #eee;border-radius:12px;padding:16px;background:#fff;margin:16px 0}
+.form-row{display:flex;flex-direction:column;margin-bottom:12px}
+.form-row.cols-2{flex-direction:row;gap:12px}
+.form-row input,.form-row select,.form-row textarea{padding:10px 12px;border:1px solid #ddd;border-radius:8px}
+.site-footer{border-top:1px solid #eee;padding:16px 0;margin-top:24px}
+.footer-wrap{display:flex;align-items:center;justify-content:space-between}
+.brand.small .logo-text{font-weight:600;color:#2e7d32}
+.brand.small .logo-strong{font-weight:800;color:#1b5e20}
+

@@ -7,18 +7,20 @@
   <link rel="stylesheet" href="css/cart.css">
 </head>
 <body>
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="logo">कृषि<span>Connect</span></div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="buy.html">Buy Produce</a>
-      <a href="sell.html">Sell Produce/Waste</a>
-      <a href="about.html">About Us</a>
-    </nav>
-    <div class="auth-buttons">
-      <button class="login">Login</button>
-      <button class="register">Register</button>
+  <header class="site-header">
+    <div class="container header-wrap">
+      <div class="brand">
+        <a href="index.html" class="brand-link"><span class="logo-text">कृषि</span><span class="logo-strong">Connect</span></a>
+      </div>
+      <nav class="nav">
+        <a href="products.html">Buy Produce</a>
+        <a href="waste.html">Sell Produce/Waste</a>
+        <a href="dashboard.html">Dashboard</a>
+      </nav>
+      <div class="auth">
+        <a class="link" href="signup.html">sign in</a>
+        <a class="btn btn-primary" href="signup.html">sign up</a>
+      </div>
     </div>
   </header>
 
@@ -38,6 +40,9 @@
     </div>
   </section>
 
+
+
+  <script src="js/api.js"></script>
   <script src="js/cart.js"></script>
 </body>
 </html>

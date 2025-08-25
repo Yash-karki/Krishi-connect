@@ -34,5 +34,12 @@
   </main>
 
   <script src="js/dashboard.js"></script>
+  <script>
+    // quick nav hookup
+    (function(){
+      var logo = document.querySelector('.logo');
+      if(logo){ logo.style.cursor = 'pointer'; logo.addEventListener('click', function(){ window.location.href = 'index.html'; }); }
+    })();
+  </script>
 </body>
 </html>

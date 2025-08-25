@@ -6,45 +6,17 @@ body {
   color: #333;
 }
 
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 40px;
-  background: white;
-  border-bottom: 1px solid #eee;
-}
-.logo {
-  font-size: 22px;
-  font-weight: bold;
-  color: #2e7d32;
-}
-.logo span {
-  color: #388e3c;
-}
-nav a {
-  margin: 0 15px;
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-}
-.auth-buttons .login {
-  background: transparent;
-  border: 1px solid #388e3c;
-  padding: 5px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.auth-buttons .register {
-  background: #388e3c;
-  border: none;
-  color: white;
-  padding: 6px 14px;
-  border-radius: 6px;
-  margin-left: 8px;
-  cursor: pointer;
-}
+/* Header reused theme */
+.site-header{border-bottom:1px solid #eee;background:#fff}
+.container{max-width:1100px;margin:0 auto;padding:0 16px}
+.header-wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand .logo-text{font-weight:600;color:#2e7d32}
+.brand .logo-strong{font-weight:800;color:#1b5e20}
+.nav a{margin:0 8px;color:#222;text-decoration:none}
+.auth .btn{margin-left:8px}
+.btn{display:inline-block;padding:10px 14px;border-radius:8px;border:1px solid transparent;cursor:pointer;text-decoration:none}
+.btn-primary{background:#1b5e20;color:#fff}
+.btn-success{background:#2e7d32;color:#fff}
 
 /* Cart */
 .cart-container {
@@ -119,3 +91,7 @@ nav a {
   font-size: 16px;
   cursor: pointer;
 }
+
+/* Footer reused theme */
+.site-footer{border-top:1px solid #eee;padding:16px 0;margin-top:24px;background:#fff}
+.footer-wrap{display:flex;align-items:center;justify-content:space-between}

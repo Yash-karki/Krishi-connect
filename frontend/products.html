@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products - कृषिConnect</title>
+  <link rel="stylesheet" href="css/products.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-wrap">
+      <div class="brand">
+        <a href="index.html" class="brand-link"><span class="logo-text">कृषि</span><span class="logo-strong">Connect</span></a>
+      </div>
+      <nav class="nav">
+        <a href="products.html" class="active">Buy Produce</a>
+        <a href="waste.html">Sell Produce/Waste</a>
+        <a href="dashboard.html">Dashboard</a>
+      </nav>
+      <div class="auth">
+        <a class="link" href="signup.html">sign in</a>
+        <a class="btn btn-primary" href="signup.html">sign up</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="products-page container">
+    <div class="products-topbar">
+      <form id="products-search" class="search">
+        <input id="q" type="text" placeholder="Search products" aria-label="Search products" />
+        <button type="submit" class="btn btn-amber">Search</button>
+      </form>
+      <a href="cart.html" class="btn btn-success" id="cartLink">Cart (0)</a>
+    </div>
+
+    <section id="productsGrid" class="products-grid">
+      <!-- Cards injected by JS -->
+    </section>
+  </main>
+
+
+
+  <script src="js/api.js"></script>
+  <script src="js/products.js"></script>
+</body>
+</html>
+
+
