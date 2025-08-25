@@ -73,26 +73,30 @@
     </section>
   </main>
 
-
-
+  <!-- External JS Files -->
   <script src="js/auth.js"></script>
   <script src="js/api.js"></script>
   <script src="js/auth-guard.js"></script>
+
+  <!-- Inline Script -->
   <script>
     (function() {
       var form = document.getElementById('wasteForm');
       var grid = document.getElementById('myListings');
+
       function addCard(data){
         var div = document.createElement('div');
         div.className = 'product-card';
-        div.innerHTML = '<div class="pc-body">'
-          + '<h3>'+data.name+'</h3>'
-          + '<p class="muted">'+data.category+' • '+data.quantity+' Kg</p>'
-          + '<p><strong>₹'+data.price+'/Kg</strong></p>'
-          + '<p>'+ (data.description||'') +'</p>'
-          + '</div>';
+        div.innerHTML = `
+          <div class="pc-body">
+            <h3>${data.name}</h3>
+            <p class="muted">${data.category} • ${data.quantity} Kg</p>
+            <p><strong>₹${data.price}/Kg</strong></p>
+            <p>${data.description || ''}</p>
+          </div>`;
         grid.prepend(div);
       }
+
       if(form){
         form.addEventListener('submit', async function(e){
           e.preventDefault();
@@ -115,25 +119,17 @@
           btn.textContent = 'Submitting...';
 
           try {
-            // Create listing (backend will also create product automatically)
             const response = await window.KrishiAuth.authenticatedRequest('/api/listings', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                name: payload.name,
-                category: payload.category,
-                quantity: payload.quantity,
-                price: payload.price,
-                description: payload.description
-              })
+              body: JSON.stringify(payload)
             });
-            
+
             if (!response.ok) {
               const error = await response.json();
               throw new Error(error.message || 'Failed to create listing');
             }
 
-            // Update UI locally
             addCard(payload);
             form.reset();
             alert('Listing submitted and published to marketplace!');
@@ -146,29 +142,31 @@
           }
         });
 
-        // Load user's existing listings from database
-        if (window.KrishiAuth && window.KrishiAuth.isAuthenticated()) {
-          try {
-            const response = await window.KrishiAuth.authenticatedRequest('/api/listings/me');
-            if (response.ok) {
-              const listings = await response.json();
-              listings.forEach(addCard);
+        // ✅ Async loader
+        async function loadListings() {
+          if (window.KrishiAuth && window.KrishiAuth.isAuthenticated()) {
+            try {
+              const response = await window.KrishiAuth.authenticatedRequest('/api/listings/me');
+              if (response.ok) {
+                const listings = await response.json();
+                listings.forEach(addCard);
+              }
+            } catch (error) {
+              console.error('Failed to load listings:', error);
             }
-          } catch (error) {
-            console.error('Failed to load listings:', error);
           }
         }
+        loadListings();
       }
-      
-      // Setup authentication UI
+
+      // Auth UI setup
       if (window.KrishiAuth && window.KrishiAuth.isAuthenticated()) {
         const user = window.KrishiAuth.getCurrentUser();
         if (user) {
-          document.getElementById('userName').textContent = `Welcome, ${user.email}`;
+          document.getElementById('userName').textContent = `Welcome, ${user.name}`;
           document.getElementById('userInfo').style.display = 'inline';
           document.getElementById('authLinks').style.display = 'none';
-          
-          // Setup logout button
+
           const logoutBtn = document.getElementById('logoutBtn');
           if (logoutBtn) {
             logoutBtn.addEventListener('click', function() {
@@ -179,7 +177,6 @@
       }
     })();
   </script>
+
 </body>
 </html>
-
-

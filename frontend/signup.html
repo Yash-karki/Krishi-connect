@@ -8,6 +8,48 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Yeh CSS direct yaha daal raha hu, tu chahe to signup.css me shift kar sakta hai */
+
+    .branding-section {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      font-weight: 700;
+      background: url("assets/images/WhatsApp_Image_2025-08-26_at_02.35.24_e9179306-removebg-preview.png") no-repeat center center;
+      background-size: cover;  /* ✅ pura div cover karega */
+      position: relative;
+    }
+
+    .branding-section::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.4); /* ✅ Thoda dark overlay taaki text visible ho */
+    }
+
+    .branding-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .branding-text {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #fff;
+      margin-top: 20px;
+    }
+
+    .branding-text .devanagari {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: 2.8rem;
+      margin-right: 6px;
+    }
+  </style>
 </head>
 <body>
   <!-- Header -->
@@ -15,20 +57,14 @@
     <div class="container header-wrap">
       <div class="brand">
         <a href="index.html" class="brand-link"><span class="logo-text">कृषि</span><span class="logo-strong">Connect</span></a>
-      </div>
-      <nav class="nav">
-        <a href="products.html">Buy Produce</a>
-        <a href="waste.html">Sell Produce/Waste</a>
-        <a href="dashboard.html">Dashboard</a>
-      </nav>
-    </div>
+
   </header>
 
   <!-- Auth Section -->
   <main class="auth-section">
-    <!-- Left Column - Login Form -->
+    <!-- Left Column -->
     <div class="auth-card">
-      <!-- Sign In Form -->
+      <!-- Sign In -->
       <div class="auth-form" id="signin">
         <h2>Login Here!</h2>
         <div class="form-group">
@@ -46,12 +82,9 @@
           <button id="btnLogin" class="btn btn-primary">Login</button>
           <button id="btnSignup" class="btn btn-success">Sign up</button>
         </div>
-        <div class="create-account">
-          <a href="#">Create Account</a>
-        </div>
       </div>
 
-      <!-- Sign Up Form -->
+      <!-- Sign Up -->
       <div class="auth-form hidden" id="signup">
         <h2>Create Account</h2>
         <div class="form-group">
@@ -73,17 +106,14 @@
       </div>
     </div>
 
-    <!-- Right Column - Branding -->
-    <div class="branding-section">
+    <!-- Right Column with BG Image -->
+    <!-- <div class="branding-section">
       <div class="branding-content">
-        <div class="branding-icon">
-          <img src="assets/images/WhatsApp Image 2025-08-24 at 12.28.42_4c875f8b.jpg" alt="">
-        </div>
         <div class="branding-text">
           <span class="devanagari">कृषि</span> Connect
         </div>
       </div>
-    </div>
+    </div> -->
   </main>
 
   <!-- Footer -->
@@ -92,45 +122,34 @@
       <p>© 2025 कृषिConnect. All rights reserved.</p>
       <div class="social">
         <img src="assets/icons/google-brands-solid-full.svg" alt="Google">
-        <img src="assets/icons/twitter-brands-solid-full.svg" alt="twitter">
+        <img src="assets/icons/twitter-brands-solid-full.svg" alt="Twitter">
         <img src="assets/icons/linkedin-in-brands-solid-full.svg" alt="LinkedIn">
       </div>
     </div>
   </footer>
+
   <script src="js/auth.js"></script>
+  
   <script>
     (function(){
-      var tabs = document.querySelectorAll('.auth-tabs .tab-btn');
       var signin = document.getElementById('signin');
       var signup = document.getElementById('signup');
-      tabs.forEach(function(t){
-        t.addEventListener('click', function(e){
-          e.preventDefault();
-          tabs.forEach(function(x){ x.classList.remove('active'); });
-          t.classList.add('active');
-          if(t.getAttribute('href') === '#signup'){ signin.classList.add('hidden'); signup.classList.remove('hidden'); }
-          else { signup.classList.add('hidden'); signin.classList.remove('hidden'); }
-        });
-      });
 
       var btnLogin = document.getElementById('btnLogin');
       var btnSignup = document.getElementById('btnSignup');
       var btnSignupForm = document.getElementById('btnSignupForm');
-      
-      // Handle login
+
+      // Login
       if(btnLogin) {
         btnLogin.addEventListener('click', async function() {
           const email = document.getElementById('loginEmail').value;
           const password = document.getElementById('loginPassword').value;
-          
           if (!email || !password) {
             alert('Please fill in all fields');
             return;
           }
-          
           btnLogin.disabled = true;
           btnLogin.textContent = 'Signing In...';
-          
           try {
             const result = await window.KrishiAuth.login({ email, password });
             if (result.success) {
@@ -146,30 +165,27 @@
           }
         });
       }
-      
-      // Handle signup button in login form (switches to signup form)
+
+      // Switch to Signup Form
       if(btnSignup) {
         btnSignup.addEventListener('click', function() {
-          document.getElementById('signin').classList.add('hidden');
-          document.getElementById('signup').classList.remove('hidden');
+          signin.classList.add('hidden');
+          signup.classList.remove('hidden');
         });
       }
-      
-      // Handle signup form submission
+
+      // Signup
       if(btnSignupForm) {
         btnSignupForm.addEventListener('click', async function() {
           const name = document.getElementById('signupName').value;
           const email = document.getElementById('signupEmail').value;
           const password = document.getElementById('signupPassword').value;
-          
           if (!name || !email || !password) {
             alert('Please fill in all fields');
             return;
           }
-          
           btnSignupForm.disabled = true;
           btnSignupForm.textContent = 'Creating Account...';
-          
           try {
             const result = await window.KrishiAuth.signup({ name, email, password });
             if (result.success) {
@@ -185,14 +201,14 @@
           }
         });
       }
-      
-      // Handle back to login
+
+      // Back to login
       var backToLogin = document.getElementById('backToLogin');
       if(backToLogin) {
         backToLogin.addEventListener('click', function(e) {
           e.preventDefault();
-          document.getElementById('signup').classList.add('hidden');
-          document.getElementById('signin').classList.remove('hidden');
+          signup.classList.add('hidden');
+          signin.classList.remove('hidden');
         });
       }
     })();

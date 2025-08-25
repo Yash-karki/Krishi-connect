@@ -84,7 +84,7 @@
       if (window.KrishiAuth && window.KrishiAuth.isAuthenticated()) {
         const user = window.KrishiAuth.getCurrentUser();
         if (user) {
-          document.getElementById('userName').textContent = `Welcome, ${user.email}`;
+          document.getElementById('userName').textContent = `Welcome, ${user.name}`;
           document.getElementById('userInfo').style.display = 'inline';
           document.getElementById('authLinks').style.display = 'none';
           

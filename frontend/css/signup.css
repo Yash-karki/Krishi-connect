@@ -8,10 +8,24 @@
   --text-600: #4b5563;
   --border: #e5e7eb;
   --bg: #ffffff;
-  --brand-orange: #ff6b35;
+  /* --brand-orange: #ff6b35; */
   --brand-brown: #f4a261;
   --brand-teal: #264653;
 }
+
+/* Branding section image ko fix karne ke liye */
+.branding-icon {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%; /* Circle */
+  background-image: url("../assets/images/WhatsApp Image 2025-08-26 at 02.35.24_a0b55138.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2); /* Thoda shadow look ke liye */
+}
+
 
 body {
   font-family: 'Inter', Arial, sans-serif;
