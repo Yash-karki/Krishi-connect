@@ -7,12 +7,12 @@ async function signup(req, res) {
   if (!name || !email || !password) return res.status(400).json({ message: 'Missing fields' });
   const conn = await getConnection();
   try {
-    const [existing] = await conn.query('SELECT id FROM users WHERE LOWER(email) = LOWER(?) LIMIT 1', [email]);
+    const [existing] = await conn.query('SELECT User_ID FROM users WHERE LOWER(Email) = LOWER(?) LIMIT 1', [email]);
     if (existing.length) return res.status(409).json({ message: 'Email already registered' });
 
     const hash = await bcrypt.hash(password, 10);
     const [result] = await conn.query(
-      'INSERT INTO users (name, email, password_hash, role) VALUES (?, ?, ?, ?)',
+      'INSERT INTO users (Name, Email, Password, Role) VALUES (?, ?, ?, ?)',
       [name, email.toLowerCase(), hash, role || 'Buyer']
     );
     const userId = result.insertId;
@@ -41,13 +41,13 @@ async function login(req, res) {
 
   const conn = await getConnection();
   try {
-    const [rows] = await conn.query('SELECT id, name, email, password_hash, role FROM users WHERE LOWER(email)=LOWER(?) LIMIT 1', [email]);
+    const [rows] = await conn.query('SELECT User_ID, Name, Email, Password, Role FROM users WHERE LOWER(Email)=LOWER(?) LIMIT 1', [email]);
     if (!rows.length) return res.status(401).json({ message: 'Invalid credentials' });
     const row = rows[0];
-    const ok = await bcrypt.compare(password, row.password_hash);
+    const ok = await bcrypt.compare(password, row.Password);
     if (!ok) return res.status(401).json({ message: 'Invalid credentials' });
-    const token = jwt.sign({ id: row.id, name: row.name, email: row.email, role: row.role }, process.env.JWT_SECRET || 'dev_secret', { expiresIn: '7d' });
-    return res.json({ token, user: { id: row.id, name: row.name, email: row.email, role: row.role } });
+    const token = jwt.sign({ id: row.User_ID, name: row.Name, email: row.Email, role: row.Role }, process.env.JWT_SECRET || 'dev_secret', { expiresIn: '7d' });
+    return res.json({ token, user: { id: row.User_ID, name: row.Name, email: row.Email, role: row.Role } });
   } catch (e) {
     console.error(e);
     return res.status(500).json({ message: 'Server error' });
@@ -57,11 +57,15 @@ async function login(req, res) {
 async function me(req, res){
   const conn = await getConnection();
   try{
-    const [rows] = await conn.query('SELECT id, name, email, role FROM users WHERE id = ? LIMIT 1', [req.user.id]);
+    const [rows] = await conn.query('SELECT User_ID as id, Name as name, Email as email, Role as role FROM users WHERE User_ID = ? LIMIT 1', [req.user.id]);
     if(!rows.length) return res.status(404).json({message:'Not found'});
     return res.json(rows[0]);
-  }catch(e){ console.error(e); return res.status(500).json({message:'Server error'}); }
-  finally{ conn.release(); }
+  } catch(e) { 
+    console.error(e); 
+    return res.status(500).json({message:'Server error'}); 
+  } finally { 
+    conn.release(); 
+  }
 }
 
 module.exports = { signup, login, me };

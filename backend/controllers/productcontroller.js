@@ -9,8 +9,12 @@ async function listProducts(req, res){
     if(q){ sql += ' WHERE LOWER(name) LIKE ?'; params.push(`%${q}%`); }
     const [rows] = await conn.query(sql, params);
     return res.json(rows);
-  }catch(e){ console.error(e); return res.status(500).json({message:'Server error'}); }
-  finally{ conn.release(); }
+  } catch(e) { 
+    console.error(e); 
+    return res.status(500).json({message:'Server error'}); 
+  } finally { 
+    conn.release(); 
+  }
 }
 
 async function createProduct(req, res){
@@ -23,8 +27,12 @@ async function createProduct(req, res){
       [name, price, unit || 'Kg']
     );
     return res.status(201).json({ message: 'Created' });
-  }catch(e){ console.error(e); return res.status(500).json({message:'Server error'}); }
-  finally{ conn.release(); }
+  } catch(e) { 
+    console.error(e); 
+    return res.status(500).json({message:'Server error'}); 
+  } finally { 
+    conn.release(); 
+  }
 }
 
 module.exports = { listProducts, createProduct };

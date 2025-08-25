@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const secret="SuperM@n@121";
 
 function authRequired(req, res, next) {
   try {

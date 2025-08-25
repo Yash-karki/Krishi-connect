@@ -1,17 +1,16 @@
-const { getConnection } = require("./db");
+const { getConnection } = require("../config/db");
 
 const OrderModel = {
   async updateStatus(orderId, status) {
     const conn = await getConnection();
     try {
-      const result = await conn.execute(
-        `UPDATE ORDERS SET STATUS = :status WHERE Order_ID = :orderId`,
-        { status, orderId },
-        { autoCommit: true }
+      const [r] = await conn.query(
+        'UPDATE orders SET status = ? WHERE id = ?',
+        [status, orderId]
       );
-      return result;
+      return { affectedRows: r.affectedRows };
     } finally {
-      await conn.close();
+      conn.release();
     }
   }
 };

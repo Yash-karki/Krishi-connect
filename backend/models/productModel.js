@@ -1,13 +1,13 @@
-const { getConnection } = require("./db");
+const { getConnection } = require("../config/db");
 
 const ProductModel = {
   async getAllProducts() {
     const conn = await getConnection();
     try {
-      const result = await conn.execute(`SELECT * FROM PRODUCE`);
-      return result.rows;
+      const [rows] = await conn.query('SELECT id, name, price_per_unit AS price, unit FROM products');
+      return rows;
     } finally {
-      await conn.close();
+      conn.release();
     }
   }
 };
