@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <!-- Dark Green Header -->
@@ -90,12 +89,30 @@
         </div>
       </div>
 
-      <!-- Chart Section -->
-      <div class="chart-section">
-        <h3>Profit %</h3>
-        <div class="chart-container">
-          <canvas id="profitChart"></canvas>
-        </div>
+      <!-- Recent Orders Section -->
+      <div class="orders-section">
+        <h3>Recent Orders</h3>
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Product</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+      <!-- Notifications Section -->
+      <div class="notifications-section">
+        <h3>Notifications</h3>
+        <ul class="notifications-list">
+          <li>🌾 Your order #101 has been delivered successfully.</li>
+          <li>💰 Payment of ₹3000 credited to your account.</li>
+          <li>⚠️ New buyer request for Sugarcane (50 Kg).</li>
+        </ul>
       </div>
     </section>
   </div>
@@ -103,73 +120,5 @@
   <script src="js/auth.js"></script>
   <script src="js/auth-guard.js"></script>
   <script src="js/dashboard.js"></script>
-  <script>
-    // Initialize profit chart
-    document.addEventListener('DOMContentLoaded', function() {
-      const ctx = document.getElementById('profitChart').getContext('2d');
-      
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-          datasets: [
-            {
-              label: 'Revenue',
-              data: [150, 200, 180, 250, 300, 280],
-              borderColor: '#4CAF50',
-              backgroundColor: 'rgba(76, 175, 80, 0.1)',
-              tension: 0.4
-            },
-            {
-              label: 'Expenses',
-              data: [100, 120, 110, 140, 160, 150],
-              borderColor: '#FF9800',
-              backgroundColor: 'rgba(255, 152, 0, 0.1)',
-              tension: 0.4
-            },
-            {
-              label: 'Profit',
-              data: [50, 80, 70, 110, 140, 130],
-              borderColor: '#9C27B0',
-              backgroundColor: 'rgba(156, 39, 176, 0.1)',
-              tension: 0.4
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            y: {
-              beginAtZero: true,
-              max: 300,
-              ticks: {
-                stepSize: 100
-              }
-            }
-          },
-          plugins: {
-            legend: {
-              position: 'top',
-            }
-          }
-        }
-      });
-    });
-
-    // Load user data and populate form
-    if (window.KrishiAuth && window.KrishiAuth.isAuthenticated()) {
-      const user = window.KrishiAuth.getCurrentUser();
-      if (user) {
-        // Populate form fields with user data
-        document.getElementById('firstName').value = user.name ? user.name.split(' ')[0] : '';
-        document.getElementById('lastName').value = user.name ? user.name.split(' ').slice(1).join(' ') : '';
-        document.getElementById('email').value = user.email || '';
-      }
-    } else {
-      // Redirect to login if not authenticated
-      window.location.href = 'signup.html';
-    }
-  </script>
 </body>
 </html>

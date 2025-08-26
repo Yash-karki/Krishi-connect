@@ -4,7 +4,7 @@ async function listProducts(req, res){
   const q = (req.query.q || '').trim().toLowerCase();
   const conn = await getConnection();
   try{
-    let sql = 'SELECT id, name, price_per_unit AS price, unit FROM products';
+    let sql = 'SELECT id, name, price_per_unit AS price, unit, description FROM products';
     let params = [];
     if(q){ sql += ' WHERE LOWER(name) LIKE ?'; params.push(`%${q}%`); }
     const [rows] = await conn.query(sql, params);
@@ -36,6 +36,3 @@ async function createProduct(req, res){
 }
 
 module.exports = { listProducts, createProduct };
-
-
-

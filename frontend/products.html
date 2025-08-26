@@ -17,9 +17,8 @@
       </div>
       <nav class="nav">
         <a href="index.html">Home</a>
-        <a href="waste.html">Farmers</a>
+        <a href="waste.html">Sell Produce/Waste</a>
         <a href="products.html" class="active">Market</a>
-        <a href="dashboard.html">Transport</a>
       </nav>
       <div class="auth">
         <span id="userInfo" style="display: none;">
@@ -62,7 +61,7 @@
       if (window.KrishiAuth && window.KrishiAuth.isAuthenticated()) {
         const user = window.KrishiAuth.getCurrentUser();
         if (user) {
-          document.getElementById('userName').textContent = `Welcome, ${user.email}`;
+          document.getElementById('userName').textContent = `Welcome, ${user.name}`;
           document.getElementById('userInfo').style.display = 'inline';
           document.getElementById('authLinks').style.display = 'none';
           
