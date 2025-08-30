@@ -5,120 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard - कृषिConnect</title>
   <link rel="stylesheet" href="css/dashboard.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <!-- Dark Green Header -->
-  <header class="header-top">
-    <div class="logo">कृषि Connect</div>
-  </header>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">कृषि<span>Connect</span></div>
+    <ul id="sidebarMenu">
+      <!-- Menu items JS ke through load honge -->
+    </ul>
+  </aside>
 
-  <!-- Main Container -->
-  <div class="dashboard-container">
-    <!-- Left Column - Profile Section -->
-    <section class="profile-section">
-      <div class="profile-picture"></div>
-      
-      <form class="profile-form">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="firstName">First name</label>
-            <input type="text" id="firstName" name="firstName" placeholder="Enter first name">
-          </div>
-          <div class="form-group">
-            <label for="lastName">Last name</label>
-            <input type="text" id="lastName" name="lastName" placeholder="Enter last name">
-          </div>
-        </div>
-        
-        <div class="password-section">
-          <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter password">
-          </div>
-          <a href="#" class="change-password">Change password</a>
-        </div>
-        
-        <div class="form-group">
-          <label for="email">Email or Phone Number</label>
-          <input type="text" id="email" name="email" placeholder="Enter email or phone">
-        </div>
-        
-        <div class="form-group">
-          <label for="address">Address</label>
-          <input type="text" id="address" name="address" placeholder="Enter address">
-        </div>
-        
-        <div class="form-row">
-          <div class="form-group">
-            <label for="state">State</label>
-            <input type="text" id="state" name="state" placeholder="Enter state">
-          </div>
-          <div class="form-group">
-            <label for="pinCode">Pin Code</label>
-            <input type="text" id="pinCode" name="pinCode" placeholder="Enter pin code">
-          </div>
-        </div>
-      </form>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Top Navbar -->
+    <header class="topbar">
+      <h2 id="welcomeText">Welcome 👨‍🌾</h2>
+      <div class="user-box">
+        <span id="username">User</span>
+        <img src="https://i.ibb.co/PhbPWhK/farmer-avatar.png" alt="User Avatar">
+        <button id="logoutBtn" class="logout-btn">Logout</button>
+      </div>
+    </header>
+
+    <!-- Dynamic Sections -->
+    <section id="dashboardContent">
+      <!-- Cards and Analytics JS ke through inject honge -->
     </section>
-
-    <!-- Right Column - Dashboard Section -->
-    <section class="dashboard-section">
-      <!-- Welcome Card -->
-      <div class="welcome-card">
-        <h2>Hello farmer!</h2>
-        <p>Here are the latest updates of your sales,</p>
-        <div class="date">Monday, 25 August 2025</div>
-      </div>
-
-      <!-- Stats Cards -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <h3>Income</h3>
-          <div class="value">₹1,07,890</div>
-        </div>
-        <div class="stat-card">
-          <h3>Expenses</h3>
-          <div class="value">₹89,780</div>
-        </div>
-        <div class="stat-card">
-          <h3>Total Orders</h3>
-          <div class="value">14</div>
-        </div>
-      </div>
-
-      <!-- Recent Orders Section -->
-      <div class="orders-section">
-        <h3>Recent Orders</h3>
-        <table class="orders-table">
-          <thead>
-            <tr>
-              <th>Order ID</th>
-              <th>Product</th>
-              <th>Qty</th>
-              <th>Price</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-
-      <!-- Notifications Section -->
-      <div class="notifications-section">
-        <h3>Notifications</h3>
-        <ul class="notifications-list">
-          <li>🌾 Your order #101 has been delivered successfully.</li>
-          <li>💰 Payment of ₹3000 credited to your account.</li>
-          <li>⚠️ New buyer request for Sugarcane (50 Kg).</li>
-        </ul>
-      </div>
-    </section>
-  </div>
+  </main>
 
   <script src="js/auth.js"></script>
-  <script src="js/auth-guard.js"></script>
   <script src="js/dashboard.js"></script>
+  <script>
+    // quick nav hookup
+    (function(){
+      var logo = document.querySelector('.logo');
+      if(logo){ logo.style.cursor = 'pointer'; logo.addEventListener('click', function(){ window.location.href = 'index.html'; }); }
+      
+      // Load user data and setup logout
+      if (window.KrishiAuth && window.KrishiAuth.isAuthenticated()) {
+        const user = window.KrishiAuth.getCurrentUser();
+        if (user) {
+          document.getElementById('username').textContent = user.name || 'User';
+          document.getElementById('welcomeText').textContent = `Welcome ${user.name || 'User'} 👨‍🌾`;
+        }
+        
+        // Setup logout button
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+          logoutBtn.addEventListener('click', function() {
+            window.KrishiAuth.logout();
+          });
+        }
+      } else {
+        // Redirect to login if not authenticated
+        window.location.href = 'signup.html';
+      }
+    })();
+  </script>
 </body>
 </html>

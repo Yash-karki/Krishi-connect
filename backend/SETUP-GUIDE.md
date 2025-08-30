@@ -109,3 +109,4 @@ After setting up authentication:
 2. Verify protected pages require authentication
 3. Check that logout works correctly
 4. Test token expiration handling
+

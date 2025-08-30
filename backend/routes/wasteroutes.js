@@ -8,3 +8,4 @@ router.get('/me', authRequired, myListings);
 router.delete('/:id', authRequired, deleteListing);
 
 module.exports = router;
+

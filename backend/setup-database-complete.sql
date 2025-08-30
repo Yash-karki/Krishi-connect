@@ -84,3 +84,4 @@ INSERT IGNORE INTO products (name, price_per_unit, unit) VALUES
 
 -- Show success message
 SELECT 'Database setup completed successfully!' as status;
+

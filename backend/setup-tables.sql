@@ -43,3 +43,6 @@ INSERT IGNORE INTO products (name, price_per_unit, unit) VALUES
 ('Carrots', 40.00, 'Kg');
 
 
+
+
+
