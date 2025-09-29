@@ -46,16 +46,65 @@ function renderCart() {
   // Setup checkout button
   var checkoutBtn = document.getElementById('checkoutBtn');
   if(checkoutBtn){
-    checkoutBtn.onclick = function(){
+    checkoutBtn.onclick = async function(){
       var termsChecked = document.getElementById('termsCheck').checked;
       if (!termsChecked) {
         alert('Please agree to terms & conditions');
         return;
       }
-      alert('Checkout successful!');
-      setCart([]);
-      renderCart();
-      window.location.href = 'cart.html';
+      
+      const cart = getCart();
+      if (cart.length === 0) {
+        alert('Your cart is empty');
+        return;
+      }
+      
+      // Disable checkout button during processing
+      checkoutBtn.disabled = true;
+      checkoutBtn.textContent = 'Processing...';
+      
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          alert('Please login to checkout');
+          window.location.href = 'signup.html';
+          return;
+        }
+        
+        // Format cart items for API
+        const items = cart.map(item => ({
+          productId: item.id,
+          quantity: item.quantity,
+          price: item.price
+        }));
+        
+        const response = await fetch('/api/orders', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ items })
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+          alert('Order placed successfully! Order ID: ' + result.id);
+          setCart([]);
+          renderCart();
+          window.location.href = 'dashboard.html';
+        } else {
+          alert('Checkout failed: ' + (result.message || 'Unknown error'));
+        }
+      } catch (error) {
+        console.error('Checkout error:', error);
+        alert('Checkout failed. Please try again.');
+      } finally {
+        // Re-enable checkout button
+        checkoutBtn.disabled = false;
+        checkoutBtn.textContent = 'Checkout';
+      }
     };
   }
 }
