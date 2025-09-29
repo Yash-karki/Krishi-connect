@@ -36,11 +36,11 @@ CREATE TABLE IF NOT EXISTS order_items (
 );
 
 -- Insert some sample products
-INSERT IGNORE INTO products (name, price_per_unit, unit) VALUES 
-('Fresh Tomatoes', 45.00, 'Kg'),
-('Organic Potatoes', 30.00, 'Kg'),
-('Green Peas', 80.00, 'Kg'),
-('Carrots', 40.00, 'Kg');
+-- INSERT IGNORE INTO products (name, price_per_unit, unit) VALUES 
+-- ('Fresh Tomatoes', 45.00, 'Kg'),
+-- ('Organic Potatoes', 30.00, 'Kg'),
+-- ('Green Peas', 80.00, 'Kg'),
+-- ('Carrots', 40.00, 'Kg');
 
 
 

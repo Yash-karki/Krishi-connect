@@ -33,8 +33,8 @@ async function createListing(req, res) {
     // 2. Also create a product entry so it shows up for buyers
     console.log('Inserting into products table...');
     await conn.query(
-      'INSERT INTO products (name, price_per_unit, unit, description) VALUES (?, ?, ?, ?)',
-      [name, price, 'Kg', description]
+      'INSERT INTO products (name, price_per_unit, unit, user_id, description) VALUES (?, ?, ?, ?, ?)',
+      [name, price, 'Kg', req.user.id, description]
     );
     console.log('Product inserted successfully');
 
@@ -88,37 +88,64 @@ async function deleteListing(req, res) {
   try {
     console.log(`Attempting to delete listing ${id} for user ${req.user.id}`);
     
+    // Start transaction for cascading delete
+    await conn.beginTransaction();
+    
     // First check if the listing exists and belongs to the user
     const [checkResult] = await conn.query(
-      'SELECT id, user_id FROM listings WHERE id = ?',
+      'SELECT id, user_id, name FROM listings WHERE id = ?',
       [id]
     );
     
     if (checkResult.length === 0) {
       console.log(`Listing ${id} not found`);
+      await conn.rollback();
       return res.status(404).json({ message: 'Listing not found' });
     }
     
     if (checkResult[0].user_id !== req.user.id) {
       console.log(`Listing ${id} does not belong to user ${req.user.id}`);
+      await conn.rollback();
       return res.status(403).json({ message: 'You can only delete your own listings' });
     }
     
+    const listingName = checkResult[0].name;
+    
     // Delete the listing
-    const [result] = await conn.query(
+    const [listingResult] = await conn.query(
       'DELETE FROM listings WHERE id = ? AND user_id = ?',
       [id, req.user.id]
     );
     
-    if (result.affectedRows === 0) {
+    if (listingResult.affectedRows === 0) {
       console.log(`No rows affected when deleting listing ${id}`);
+      await conn.rollback();
       return res.status(404).json({ message: 'Listing not found or not yours' });
     }
     
-    console.log(`Successfully deleted listing ${id}`);
-    return res.json({ message: 'Listing deleted successfully' });
+    // Also delete corresponding product entry with the same name and user_id
+    const [productResult] = await conn.query(
+      'DELETE FROM products WHERE name = ? AND user_id = ?',
+      [listingName, req.user.id]
+    );
+    
+    console.log(`Deleted ${productResult.affectedRows} corresponding product(s) for listing "${listingName}"`);
+    
+    // Commit the transaction
+    await conn.commit();
+    
+    console.log(`Successfully deleted listing ${id} and corresponding product(s)`);
+    return res.json({ 
+      message: 'Listing and corresponding product deleted successfully',
+      deletedProducts: productResult.affectedRows
+    });
   } catch (e) {
     console.error('Error deleting listing:', e);
+    try {
+      await conn.rollback();
+    } catch (rollbackError) {
+      console.error('Rollback failed:', rollbackError);
+    }
     return res.status(500).json({ message: 'Server error while deleting listing' });
   } finally {
     conn.release();

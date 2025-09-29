@@ -71,16 +71,16 @@ CREATE INDEX IF NOT EXISTS idx_order_items_order_id ON order_items(order_id);
 CREATE INDEX IF NOT EXISTS idx_listings_user_id ON listings(user_id);
 
 -- Insert sample products (only if table is empty)
-INSERT IGNORE INTO products (name, price_per_unit, unit) VALUES 
-('Fresh Tomatoes', 45.00, 'Kg'),
-('Organic Potatoes', 30.00, 'Kg'),
-('Green Peas', 80.00, 'Kg'),
-('Carrots', 40.00, 'Kg'),
-('Onions', 25.00, 'Kg'),
-('Cabbage', 20.00, 'Kg'),
-('Cauliflower', 45.00, 'Kg'),
-('Spinach', 15.00, 'Kg'),
-('Cucumber', 30.00, 'Kg');
+-- INSERT IGNORE INTO products (name, price_per_unit, unit) VALUES 
+-- ('Fresh Tomatoes', 45.00, 'Kg'),
+-- ('Organic Potatoes', 30.00, 'Kg'),
+-- ('Green Peas', 80.00, 'Kg'),
+-- ('Carrots', 40.00, 'Kg'),
+-- ('Onions', 25.00, 'Kg'),
+-- ('Cabbage', 20.00, 'Kg'),
+-- ('Cauliflower', 45.00, 'Kg'),
+-- ('Spinach', 15.00, 'Kg'),
+-- ('Cucumber', 30.00, 'Kg');
 
 -- Show success message
 SELECT 'Database setup completed successfully!' as status;

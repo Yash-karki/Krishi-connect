@@ -70,11 +70,11 @@ INSERT INTO users (name, email, password_hash, role) VALUES
 ('John Doe', 'john@example.com', '$2b$10$example.hash.here', 'Buyer'),
 ('Jane Farmer', 'jane@example.com', '$2b$10$example.hash.here', 'Farmer');
 
-INSERT INTO products (name, price_per_unit, unit) VALUES 
-('Fresh Tomatoes', 45.00, 'Kg'),
-('Organic Potatoes', 30.00, 'Kg'),
-('Green Peas', 80.00, 'Kg'),
-('Carrots', 40.00, 'Kg');
+-- INSERT INTO products (name, price_per_unit, unit) VALUES 
+-- ('Fresh Tomatoes', 45.00, 'Kg'),
+-- ('Organic Potatoes', 30.00, 'Kg'),
+-- ('Green Peas', 80.00, 'Kg'),
+-- ('Carrots', 40.00, 'Kg');
 
 -- Create indexes for better performance
 CREATE INDEX idx_users_email ON users(email);
